@@ -9,6 +9,15 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import javafx.scene.layout.HBox;
+
+import javafx.scene.control.Button;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+import javafx.scene.paint.Color;
+
 /* Software map:
  *  - Init (launches the GUI)
  *  - "Search" class with relevant builders
@@ -46,11 +55,41 @@ public class Init extends Application {
 		initialStage.setScene(titleScene);
 		initialStage.setTitle("Title");
 		
-		// Create the title text, and add it to the titlePane's children
-		Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
+		// Create the elements and add them to titlePane
+		final Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
 		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 40));
 		
+		Text foodLocatorBody = new Text( width/8, height*3/16, "Find fast food restaurants and health stores near you.");
+		foodLocatorBody.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		foodLocatorBody.setWrappingWidth(width*3/4);
+		
+		
+		// TODO: Buttons!! Learn how these work, get fields interacting
+		
+		Button searchByZipButton = new Button("Locate within zip code");
+		
+		searchByZipButton.setLayoutX(120);
+		searchByZipButton.setLayoutX(120);
+		searchByZipButton.setPrefWidth(120);
+		searchByZipButton.setPrefHeight(120);
+		
+		
+		
+		searchByZipButton.setOnAction(new EventHandler<ActionEvent>() {
+			 
+		    @Override
+		    public void handle(ActionEvent e) {
+		        foodLocatorTitle.setFill(Color.RED);
+		    }
+		});
+		
+		
+		// We need a HBox in which to store the buttons.
+		HBox buttonBox = new HBox(width/8,searchByZipButton);
+		
 		titlePane.getChildren().add(foodLocatorTitle);
+		titlePane.getChildren().add(foodLocatorBody);
+		titlePane.getChildren().add(buttonBox);
 		
 		initialStage.show();
 	
