@@ -53,26 +53,16 @@ public class Init extends Application {
 		//  will make it easy to change it later on.
 		int width;
 		int height;
-		final int[] type; 							// type will represent the kind of search we are doing.
-		type = new int[1];							// Due to technical reasons, type must be a one-integer long array
-		final Stage currentStage = initialStage;	//Necessary to initialize our stage here
-		// final Scene currentScene; // TODO: GET RID OF THIS?
-		String[] searchTypes = new String[2];		// This is where we'll store the string of search types
 		
+		final int[] type; 							// type will represent the kind of search we are doing.
+		type = new int[1];							// We can only pass final variables into the button action; by passing an array, we can change this value.
+		final Stage currentStage = initialStage;	// A final pointer to initialStage let's us access it from the button action
+	
 		width = 640;
 		height = 640;
-		type[0] = -1; // -1 is "null", 0 is "By zip code", 1 is "By address"
-		searchTypes[0] = "zip code";
-		searchTypes[1] = "address";
-		
-		
-		
-		/**************************/
-		/* Step One: Title Screen */
-		/**************************/
-		
-		//// Set up the scenes that we will be using
-		
+		type[0] = -1; // -1 is "not-set", 0 is "By zip code", 1 is "By address"
+	
+		/// Setting up the scenes we will be using
 		// Set up the GridPane, Scene, and apply the Scene to the Stage
 		// GridPanes supply a Grid of Layout components, into which we can place buttons and fields with ease.
 		// Scene 1
@@ -94,6 +84,16 @@ public class Init extends Application {
 		searchPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
 		final Scene searchScene = new Scene(searchPane, width, height);
 		
+		// Scene 3
+		GridPane resultPane = new GridPane();
+		resultPane.setAlignment(Pos.CENTER);
+		resultPane.setHgap(width/32);
+		resultPane.setVgap(height/32);
+		resultPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
+		final Scene resultScene = new Scene(searchPane, width, height);
+		
+		/// Defining all of our elements
+		
 		// Creates text and gives it a font
 		final Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
 		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 40));
@@ -111,12 +111,18 @@ public class Init extends Application {
 		searchAddressButton.setPrefWidth(width*5/16);
 		searchAddressButton.setPrefHeight(height/4);
 		
-		// This string belongs to part 2, but must be defined before these buttons.
-		final Text partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
+		// This string belongs to the second scene, but must be defined before the buttons.
+		//  This is because we have to set the text on partTwoText2 before sending it to its scene.
+		final Text partTwoText2 = new Text( width/16, height/8, "You should not see this string."); // This is usually the second line of text on the second screen.
 		
+		// This is the syntax for doing an action on a button click
 		searchZipButton.setOnAction(
 			new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent event){
+					// This is a totally separate class, believe it or not.
+					// We can only access final variables from here.
+					// Because type[0] is actually a pointer, we can change the value at that pointer.
+					//  All we can't do is change where the pointer points to, which would happen if we had to change the size of the array dynamically.
 					type[0] = 0;
 					currentStage.setScene(searchScene);
 					currentStage.setTitle("Search by zip code:");
@@ -143,16 +149,14 @@ public class Init extends Application {
 		titlePane.add(searchZipButton, 2, 4, 2, 1);
 		titlePane.add(searchAddressButton, 4, 4, 2, 1);
 		
-		/***************************/
-		/* Step Two: Search Screen */
-		/***************************/
 		
-		// TODO: Make the back button actually DO something
-		Button backButton = new Button("< Back");
-		backButton.setPrefWidth(width*3/8);
-		backButton.setPrefHeight(height/8);
+		/// Here are most of the elements for the second screen:
 		
-		backButton.setOnAction(
+		Button partTwoBackButton = new Button("< Back");
+		partTwoBackButton.setPrefWidth(width*3/8);
+		partTwoBackButton.setPrefHeight(height/8);
+		
+		partTwoBackButton.setOnAction(
 				new EventHandler<ActionEvent>(){
 					public void handle(ActionEvent event){
 						type[0] = -1;
@@ -169,22 +173,24 @@ public class Init extends Application {
 
 		partTwoText2.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
+		
+		// TODO: Add checkbox functionality
 		CheckBox partTwoHealthy = new CheckBox("Healthy");		
 		CheckBox partTwoJunk 	= new CheckBox("Junk");
 		
+		// TODO: Add search box functionality
 		Button searchButton = new Button("Go");
 		searchButton.setPrefWidth(width/8);
 		searchButton.setPrefHeight(height/32);	
 		
 		TextField searchField = new TextField();
 		
-		// Don't actually need this except maybe until after a search
+		// Don't actually need this button yet, but we had it in the UI design, so...
 		// TODO: Delete this useless button?
 		Button changeTypeButton = new Button("Or, press here to start again");
 		changeTypeButton.setPrefWidth(width/2);
-		// TODO: Go back to main screen and reset the type, title!
 		
-		searchPane.add(backButton,		0,0,4,1);
+		searchPane.add(partTwoBackButton,		0,0,4,1);
 		searchPane.add(partTwoText1,	1,3,3,1);
 		searchPane.add(partTwoHealthy,	2,4,1,1);
 		searchPane.add(partTwoJunk,		2,5,1,1);
@@ -192,9 +198,35 @@ public class Init extends Application {
 		searchPane.add(searchField, 	2,7,3,1);
 		searchPane.add(searchButton,	5,7,1,1);
 		// searchPane.add(changeTypeButton,1,9,7,1);
-		// TODO: Find out how to switch scenes on button press
+		
+		
+		
+		/// Define the part 3 elements
+		final Text partThreeText1 = new Text( width/32, height/16, "Results for:");
+		partThreeText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		
+		Button partThreeBackButton = new Button("< Back");
+		partThreeBackButton.setPrefWidth(width*3/8);
+		partThreeBackButton.setPrefHeight(height/8);
+		
+		partThreeBackButton.setOnAction(
+				new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event){
+						currentStage.setScene(searchScene);
+						if (type[0] == 0){
+							currentStage.setTitle("Search by zip code");
+							partTwoText2.setText("food in this zip code:");
+							
+						} else if (type[1] == 1){
+							currentStage.setTitle("Search by address:");
+							partTwoText2.setText("food near this address:");
+						}
+					}
+				}
+			);
+
 		
 		// This launches the actual window, once all is said and done
-		initialStage.show();
+		currentStage.show();
 	}
 }
