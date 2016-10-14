@@ -152,37 +152,21 @@ public class Init extends Application {
 		backButton.setPrefWidth(width*3/8);
 		backButton.setPrefHeight(height/8);
 		
+		backButton.setOnAction(
+				new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event){
+						type[0] = -1;
+						currentStage.setScene(titleScene);
+						currentStage.setTitle("Food Locator");
+					}
+				}
+			);
+		
+		
 		// We have a lot of strings here and there, they'll have weird names
 		final Text partTwoText1= new Text( width/16, height/8, "I want to find");
 		partTwoText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
-		
-		
-		/*
-			
-		switch (type[0]) {
-			case -1:
-				partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
-				break;
-			case 0:
-				partTwoText2 = new Text( width/16, height/8, "food in this :"); 
-				break;
-			case 1:
-				partTwoText2 = new Text( width/16, height/8, "food near this address:");
-				break;
-			default:
-				partTwoText2 = new Text( width/16, height/8, "food near this... Wait, \nwhat?\nIf you're seeing this,\n call the programmer!");
-				break;
-		}
-		
-		if (type[0] == 0){
-			partTwoText2 = new Text( width/16, height/8, "food in this zip code:"); 
-		} else if (type[0] == 1){
-			partTwoText2 = new Text( width/16, height/8, "food near this address:");
-		} else {
-			partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
-		}
-		
-		*/
+
 		partTwoText2.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
 		CheckBox partTwoHealthy = new CheckBox("Healthy");		
@@ -190,7 +174,7 @@ public class Init extends Application {
 		
 		Button searchButton = new Button("Go");
 		searchButton.setPrefWidth(width/8);
-		searchButton.setPrefHeight(height/32);
+		searchButton.setPrefHeight(height/32);	
 		
 		TextField searchField = new TextField();
 		
@@ -207,7 +191,7 @@ public class Init extends Application {
 		searchPane.add(partTwoText2,	1,6,3,1);
 		searchPane.add(searchField, 	2,7,3,1);
 		searchPane.add(searchButton,	5,7,1,1);
-		searchPane.add(changeTypeButton,1,9,7,1);
+		// searchPane.add(changeTypeButton,1,9,7,1);
 		// TODO: Find out how to switch scenes on button press
 		
 		// This launches the actual window, once all is said and done
