@@ -120,14 +120,14 @@ public class Init extends Application {
 		);
 		
 		searchAddressButton.setOnAction(
-				new EventHandler<ActionEvent>(){
-					public void handle(ActionEvent event){
-						type[0] = 1;
-						currentStage.setScene(searchScene);
-						currentStage.setTitle("Search by address:");
-					}
+			new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event){
+					type[0] = 1;
+					currentStage.setScene(searchScene);
+					currentStage.setTitle("Search by address:");
 				}
-			);
+			}
+		);
 		
 		// This adds the elements to the titlePane grid
 		//titlePane.add(element, Column, Row, Column Span, Row Span)
@@ -151,6 +151,7 @@ public class Init extends Application {
 		
 		final Text partTwoText2;
 		
+		/*
 		switch (type[0]) {
 			case -1:
 				partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
@@ -162,8 +163,16 @@ public class Init extends Application {
 				partTwoText2 = new Text( width/16, height/8, "food near this address:");
 				break;
 			default:
-				partTwoText2 = new Text( width/16, height/8, "food near this... Wait, what? If you're seeing, call the programmer!");
+				partTwoText2 = new Text( width/16, height/8, "food near this... Wait, \nwhat?\nIf you're seeing this,\n call the programmer!");
 				break;
+		}*/
+		
+		if (type[0] == 0){
+			partTwoText2 = new Text( width/16, height/8, "food in this zip code:"); 
+		} else if (type[0] == 1){
+			partTwoText2 = new Text( width/16, height/8, "food near this address:");
+		} else {
+			partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
 		}
 		partTwoText2.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
