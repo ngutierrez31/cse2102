@@ -40,8 +40,12 @@ public class Init extends Application {
 	public void start(Stage initialStage){
 	
 		/* What I'm doing right now
-		 * 	Get type[0] to work
-		 *  
+		 * 	Get the back button to work
+		 *  Set up the search module (searchType, storeTypes, field)
+		 *  Set up the result module
+		 *  Set up a separate stage and pane for the results
+		 *  Set up the text parsers
+		 *  Have the "go" button change the stage (and scene), as well as construct a search (and check to see if the search is good)
 		 */
 		
 		// width and height define the window size in pixels
@@ -107,14 +111,16 @@ public class Init extends Application {
 		searchAddressButton.setPrefWidth(width*5/16);
 		searchAddressButton.setPrefHeight(height/4);
 		
-		// Sets up functionality for the buttons
-		// Syntax modeled after Example 4-6 on this doc: http://docs.oracle.com/javase/8/javafx/get-started-tutorial/form.htm
+		// This string belongs to part 2, but must be defined before these buttons.
+		final Text partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
+		
 		searchZipButton.setOnAction(
 			new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent event){
 					type[0] = 0;
 					currentStage.setScene(searchScene);
 					currentStage.setTitle("Search by zip code:");
+					partTwoText2.setText("food in this zip code: ");
 				}
 			}
 		);
@@ -125,6 +131,7 @@ public class Init extends Application {
 					type[0] = 1;
 					currentStage.setScene(searchScene);
 					currentStage.setTitle("Search by address:");
+					partTwoText2.setText("food near this address:");
 				}
 			}
 		);
@@ -149,9 +156,9 @@ public class Init extends Application {
 		final Text partTwoText1= new Text( width/16, height/8, "I want to find");
 		partTwoText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
-		final Text partTwoText2;
 		
 		/*
+			
 		switch (type[0]) {
 			case -1:
 				partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
@@ -165,7 +172,7 @@ public class Init extends Application {
 			default:
 				partTwoText2 = new Text( width/16, height/8, "food near this... Wait, \nwhat?\nIf you're seeing this,\n call the programmer!");
 				break;
-		}*/
+		}
 		
 		if (type[0] == 0){
 			partTwoText2 = new Text( width/16, height/8, "food in this zip code:"); 
@@ -174,6 +181,8 @@ public class Init extends Application {
 		} else {
 			partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
 		}
+		
+		*/
 		partTwoText2.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
 		CheckBox partTwoHealthy = new CheckBox("Healthy");		
