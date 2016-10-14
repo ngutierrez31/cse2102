@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 
 /* Software map:
  *  - Init (launches the GUI)
@@ -44,6 +46,8 @@ public class Init extends Application {
 		//  will make it easy to change it later on.
 		int width;
 		int height;
+		int type;	// type will represent the kind of search we are doing.
+		type = -1;			// -1 is "null", 0 is "By zip code", 1 is "By address"
 		
 		width = 640;
 		height = 640;
@@ -55,7 +59,7 @@ public class Init extends Application {
 		// Set up the GridPane, Scene, and apply the Scene to the Stage
 		// GridPanes supply a Grid of Layout components, into which we can place buttons and fields with ease.
 		GridPane titlePane = new GridPane();
-		titlePane.setAlignment(Pos.TOP_LEFT);
+		titlePane.setAlignment(Pos.CENTER);
 		titlePane.setHgap(width/32);
 		titlePane.setVgap(height/32);
 		titlePane.setPadding(new Insets(height/64,width/64,height/64,width/64));
@@ -63,7 +67,7 @@ public class Init extends Application {
 		// Initialize our scene and assign stage a scene
 		Scene titleScene = new Scene(titlePane, width, height);
 		initialStage.setScene(titleScene);
-		initialStage.setTitle("Title");
+		initialStage.setTitle("Food Locator");
 		
 		// Creates text and gives it a font
 		final Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
@@ -108,13 +112,46 @@ public class Init extends Application {
 		
 		GridPane searchPane = new GridPane();
 
-		searchPane.setAlignment(Pos.TOP_LEFT);
+		searchPane.setAlignment(Pos.CENTER);
 		searchPane.setHgap(width/32);
 		searchPane.setVgap(height/32);
 		searchPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
 		
 		Scene searchScene = new Scene(searchPane, width, height);
+		initialStage.setScene(searchScene);
+		initialStage.setTitle("Search by zip code:");
 		
+		Button backButton = new Button("< Back");
+		backButton.setPrefWidth(width*3/8);
+		backButton.setPrefHeight(height/8);
+		
+		// We have a lot of strings here and there, they'll have weird names
+		final Text partTwoText1= new Text( width/16, height/8, "I want to find");
+		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		
+		final Text partTwoText2= new Text( width/16, height/8, "food in this zip code:");
+		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		
+		CheckBox partTwoHealthy = new CheckBox("Healthy");		
+		CheckBox partTwoJunk 	= new CheckBox("Junk");
+		
+		Button searchButton = new Button("Go");
+		searchButton.setPrefWidth(width/8);
+		searchButton.setPrefHeight(height/32);
+		
+		TextField searchField = new TextField();
+		
+		Button changeTypeButton = new Button("Or, press here to search by address instead");
+		changeTypeButton.setPrefWidth(width/2);
+		
+		searchPane.add(backButton,		0,0,4,1);
+		searchPane.add(partTwoText1,	1,3,3,1);
+		searchPane.add(partTwoHealthy,	2,4,1,1);
+		searchPane.add(partTwoJunk,		2,5,1,1);
+		searchPane.add(partTwoText2,	1,6,3,1);
+		searchPane.add(searchField, 	2,7,3,1);
+		searchPane.add(searchButton,	5,7,1,1);
+		searchPane.add(changeTypeButton,1,9,7,1);
 		// TODO: Find out how to switch scenes on button press
 		
 		// This launches the actual window, once all is said and done
