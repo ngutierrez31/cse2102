@@ -32,8 +32,6 @@ import javafx.scene.control.TextField;
 
 
 public class Init extends Application {
-
-
 	
 	public static void main(String[] args){
 		launch(args);
@@ -41,33 +39,56 @@ public class Init extends Application {
 	
 	public void start(Stage initialStage){
 	
+		/* What I'm doing right now
+		 * 	Get the buttons to click and store a search type (address or zip)
+		 *  Change the text based on the type
+		 */
+		
 		// width and height define the window size in pixels
 		//  Expressing everything in terms of width and height
 		//  will make it easy to change it later on.
 		int width;
 		int height;
-		int type;	// type will represent the kind of search we are doing.
-		type = -1;			// -1 is "null", 0 is "By zip code", 1 is "By address"
+		final int[] type; 							// type will represent the kind of search we are doing.
+		type = new int[1];							// Due to technical reasons, type must be a one-integer long array
+		final Stage currentStage = initialStage;	//Necessary to initialize our stage here
+		// final Scene currentScene; // TODO: GET RID OF THIS?
+		String[] searchTypes = new String[2];		// This is where we'll store the string of search types
 		
 		width = 640;
 		height = 640;
+		type[0] = -1; // -1 is "null", 0 is "By zip code", 1 is "By address"
+		searchTypes[0] = "zip code";
+		searchTypes[1] = "address";
+		
+		
 		
 		/**************************/
 		/* Step One: Title Screen */
 		/**************************/
 		
+		//// Set up the scenes that we will be using
+		
 		// Set up the GridPane, Scene, and apply the Scene to the Stage
 		// GridPanes supply a Grid of Layout components, into which we can place buttons and fields with ease.
+		// Scene 1
 		GridPane titlePane = new GridPane();
 		titlePane.setAlignment(Pos.CENTER);
 		titlePane.setHgap(width/32);
 		titlePane.setVgap(height/32);
 		titlePane.setPadding(new Insets(height/64,width/64,height/64,width/64));
-		
 		// Initialize our scene and assign stage a scene
-		Scene titleScene = new Scene(titlePane, width, height);
+		final Scene titleScene = new Scene(titlePane, width, height);
 		initialStage.setScene(titleScene);
 		initialStage.setTitle("Food Locator");
+		
+		// Scene 2
+		GridPane searchPane = new GridPane();
+		searchPane.setAlignment(Pos.CENTER);
+		searchPane.setHgap(width/32);
+		searchPane.setVgap(height/32);
+		searchPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
+		final Scene searchScene = new Scene(searchPane, width, height);
 		
 		// Creates text and gives it a font
 		final Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
@@ -87,17 +108,26 @@ public class Init extends Application {
 		searchAddressButton.setPrefHeight(height/4);
 		
 		// Sets up functionality for the buttons
-		searchZipButton.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		        foodLocatorTitle.setFill(Color.RED);	// TODO: Get rid of this debug code!
-		    }
-		});
+		// Syntax modeled after Example 4-6 on this doc: http://docs.oracle.com/javase/8/javafx/get-started-tutorial/form.htm
+		searchZipButton.setOnAction(
+			new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event){
+					currentStage.setScene(searchScene);
+					currentStage.setTitle("Search by zip code:");
+					type[0] = 0;
+				}
+			}
+		);
 		
-		searchAddressButton.setOnAction(new EventHandler<ActionEvent>() {
-		    public void handle(ActionEvent e) {
-		        foodLocatorTitle.setFill(Color.BLUE);	// TODO: Get rid of this debug code
-		    }
-		});
+		searchAddressButton.setOnAction(
+				new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event){
+						currentStage.setScene(searchScene);
+						currentStage.setTitle("Search by address:");
+						type[0] = 1;
+					}
+				}
+			);
 		
 		// This adds the elements to the titlePane grid
 		//titlePane.add(element, Column, Row, Column Span, Row Span)
@@ -110,17 +140,7 @@ public class Init extends Application {
 		/* Step Two: Search Screen */
 		/***************************/
 		
-		GridPane searchPane = new GridPane();
-
-		searchPane.setAlignment(Pos.CENTER);
-		searchPane.setHgap(width/32);
-		searchPane.setVgap(height/32);
-		searchPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
-		
-		Scene searchScene = new Scene(searchPane, width, height);
-		initialStage.setScene(searchScene);
-		initialStage.setTitle("Search by zip code:");
-		
+		// TODO: Make the back button actually DO something
 		Button backButton = new Button("< Back");
 		backButton.setPrefWidth(width*3/8);
 		backButton.setPrefHeight(height/8);
@@ -129,7 +149,7 @@ public class Init extends Application {
 		final Text partTwoText1= new Text( width/16, height/8, "I want to find");
 		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
-		final Text partTwoText2= new Text( width/16, height/8, "food in this zip code:");
+		final Text partTwoText2= new Text( width/16, height/8, "food in this " + searchTypes[type[0]] + ":");
 		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
 		CheckBox partTwoHealthy = new CheckBox("Healthy");		
@@ -141,8 +161,9 @@ public class Init extends Application {
 		
 		TextField searchField = new TextField();
 		
-		Button changeTypeButton = new Button("Or, press here to search by address instead");
+		Button changeTypeButton = new Button("Or, press here to start again");
 		changeTypeButton.setPrefWidth(width/2);
+		// TODO: Go back to main screen and reset the type, title!
 		
 		searchPane.add(backButton,		0,0,4,1);
 		searchPane.add(partTwoText1,	1,3,3,1);
