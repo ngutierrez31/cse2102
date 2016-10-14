@@ -40,8 +40,8 @@ public class Init extends Application {
 	public void start(Stage initialStage){
 	
 		/* What I'm doing right now
-		 * 	Get the buttons to click and store a search type (address or zip)
-		 *  Change the text based on the type
+		 * 	Get type[0] to work
+		 *  
 		 */
 		
 		// width and height define the window size in pixels
@@ -112,9 +112,9 @@ public class Init extends Application {
 		searchZipButton.setOnAction(
 			new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent event){
+					type[0] = 0;
 					currentStage.setScene(searchScene);
 					currentStage.setTitle("Search by zip code:");
-					type[0] = 0;
 				}
 			}
 		);
@@ -122,9 +122,9 @@ public class Init extends Application {
 		searchAddressButton.setOnAction(
 				new EventHandler<ActionEvent>(){
 					public void handle(ActionEvent event){
+						type[0] = 1;
 						currentStage.setScene(searchScene);
 						currentStage.setTitle("Search by address:");
-						type[0] = 1;
 					}
 				}
 			);
@@ -147,10 +147,25 @@ public class Init extends Application {
 		
 		// We have a lot of strings here and there, they'll have weird names
 		final Text partTwoText1= new Text( width/16, height/8, "I want to find");
-		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		partTwoText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
-		final Text partTwoText2= new Text( width/16, height/8, "food in this " + searchTypes[type[0]] + ":");
-		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
+		final Text partTwoText2;
+		
+		switch (type[0]) {
+			case -1:
+				partTwoText2 = new Text( width/16, height/8, "You should not see this string.");
+				break;
+			case 0:
+				partTwoText2 = new Text( width/16, height/8, "food in this :"); 
+				break;
+			case 1:
+				partTwoText2 = new Text( width/16, height/8, "food near this address:");
+				break;
+			default:
+				partTwoText2 = new Text( width/16, height/8, "food near this... Wait, what? If you're seeing, call the programmer!");
+				break;
+		}
+		partTwoText2.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
 		CheckBox partTwoHealthy = new CheckBox("Healthy");		
 		CheckBox partTwoJunk 	= new CheckBox("Junk");
@@ -161,6 +176,8 @@ public class Init extends Application {
 		
 		TextField searchField = new TextField();
 		
+		// Don't actually need this except maybe until after a search
+		// TODO: Delete this useless button?
 		Button changeTypeButton = new Button("Or, press here to start again");
 		changeTypeButton.setPrefWidth(width/2);
 		// TODO: Go back to main screen and reset the type, title!
