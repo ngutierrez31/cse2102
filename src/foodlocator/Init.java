@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
  *   - Zip parser
  *   - Address parser
  *  - And then all the confusing backend stuff
- * 
+ *  - Test clients for interface modules
  */
 
 
@@ -40,24 +40,24 @@ public class Init extends Application {
 	public void start(Stage initialStage){
 	
 		/* What I'm doing right now
-		 * 	Get the back button to work
+		 * 	Get the back button to actually undo the search contents (set the checkboxes off, etc.)
 		 *  Set up the search module (searchType, storeTypes, field)
 		 *  Set up the result module
-		 *  Set up a separate stage and pane for the results
+		 *  Set up a separate pane (and stage?) for the results
 		 *  Set up the text parsers
 		 *  Have the "go" button change the stage (and scene), as well as construct a search (and check to see if the search is good)
 		 */
-		
+
 		// width and height define the window size in pixels
 		//  Expressing everything in terms of width and height
 		//  will make it easy to change it later on.
 		int width;
 		int height;
-		
+
 		final int[] type; 							// type will represent the kind of search we are doing.
 		type = new int[1];							// We can only pass final variables into the button action; by passing an array, we can change this value.
 		final Stage currentStage = initialStage;	// A final pointer to initialStage let's us access it from the button action
-	
+
 		width = 640;
 		height = 640;
 		type[0] = -1; // -1 is "not-set", 0 is "By zip code", 1 is "By address"
@@ -83,38 +83,38 @@ public class Init extends Application {
 		searchPane.setVgap(height/32);
 		searchPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
 		final Scene searchScene = new Scene(searchPane, width, height);
-		
+
 		// Scene 3
 		GridPane resultPane = new GridPane();
 		resultPane.setAlignment(Pos.CENTER);
 		resultPane.setHgap(width/32);
 		resultPane.setVgap(height/32);
 		resultPane.setPadding(new Insets(height/64,width/64,height/64,width/64));
-		final Scene resultScene = new Scene(searchPane, width, height);
-		
+		final Scene resultScene = new Scene(resultPane, width, height);
+
 		/// Defining all of our elements
-		
+
 		// Creates text and gives it a font
 		final Text foodLocatorTitle = new Text( width/16, height/8, "Food Locator");
 		foodLocatorTitle.setFont(Font.font("Arial", FontWeight.NORMAL, 40));
-		
+
 		final Text foodLocatorBody = new Text( width/8, height*3/16, "Find fast food restaurants and health stores near you.");
 		foodLocatorBody.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		foodLocatorBody.setWrappingWidth(width*3/4);
-		
+
 		// Defines a new button, gives it a label, and a preferred with/height
 		Button searchZipButton = new Button("Locate within zip code");
 		searchZipButton.setPrefWidth(width*5/16);
 		searchZipButton.setPrefHeight(height/4);
-		
+
 		Button searchAddressButton = new Button("Locate near address");
 		searchAddressButton.setPrefWidth(width*5/16);
 		searchAddressButton.setPrefHeight(height/4);
-		
+
 		// This string belongs to the second scene, but must be defined before the buttons.
 		//  This is because we have to set the text on partTwoText2 before sending it to its scene.
 		final Text partTwoText2 = new Text( width/16, height/8, "You should not see this string."); // This is usually the second line of text on the second screen.
-		
+
 		// This is the syntax for doing an action on a button click
 		searchZipButton.setOnAction(
 			new EventHandler<ActionEvent>(){
@@ -130,7 +130,7 @@ public class Init extends Application {
 				}
 			}
 		);
-		
+
 		searchAddressButton.setOnAction(
 			new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent event){
@@ -141,7 +141,7 @@ public class Init extends Application {
 				}
 			}
 		);
-		
+
 		// This adds the elements to the titlePane grid
 		//titlePane.add(element, Column, Row, Column Span, Row Span)
 		titlePane.add(foodLocatorTitle, 0, 0, 3, 1);
@@ -198,8 +198,6 @@ public class Init extends Application {
 		searchPane.add(searchField, 	2,7,3,1);
 		searchPane.add(searchButton,	5,7,1,1);
 		// searchPane.add(changeTypeButton,1,9,7,1);
-		
-		
 		
 		/// Define the part 3 elements
 		final Text partThreeText1 = new Text( width/32, height/16, "Results for:");
