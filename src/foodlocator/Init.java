@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
-
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
