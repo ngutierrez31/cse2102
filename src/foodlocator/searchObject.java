@@ -16,21 +16,30 @@ public class searchObject {
 		searchStoreTypes[0] = findHealthStore;
 		searchStoreTypes[1] = findJunkStore;
 	}
-	
-	// Getters below
-	public String getSearchField(){
+
+	// Getters and setters below
+	public String getSearchField() {
 		return searchField;
 	}
-	
-	public int getSearchType(){
+
+	public void setSearchField(String searchField) {
+		this.searchField = searchField;
+	}
+
+	public int getSearchType() {
 		return searchType;
 	}
-	
-	public boolean getFindHealthStore(){
-		return searchStoreTypes[0];
+
+	public void setSearchType(int searchType) {
+		this.searchType = searchType;
+	}
+
+	public boolean[] getSearchStoreTypes() {
+		return searchStoreTypes;
+	}
+
+	public void setSearchStoreTypes(boolean[] searchStoreTypes) {
+		this.searchStoreTypes = searchStoreTypes;
 	}
 	
-	public boolean getFindJunkStore(){
-		return searchStoreTypes[1];
-	}
 }
