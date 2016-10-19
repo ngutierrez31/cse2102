@@ -7,12 +7,11 @@ public class locationResultObject {
 	private float  storeDistance;	// Distance from user; -1 if searching within zip code
 	
 	// Constructor
-	public locationResultObject(String name, String address, float distance){
-		storeName = name;
-		storeAddress = address;
-		storeDistance = distance;
+	public locationResultObject(String storeName, String storeAddress, float storeDistance ){
+		this.storeName = storeName;
+		this.storeAddress = storeAddress;
+		this.storeDistance = storeDistance ;
 	}
-
 
 	// Getters and setters below
 	public String getStoreName() {

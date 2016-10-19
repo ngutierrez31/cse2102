@@ -11,10 +11,10 @@ public class searchObject {
 	// Constructor, for the first two types.
 	// If we need to extend this to more types, we might want to use variable-length constructors (if Java supports them), or create multiple constructors. (Overeloading)
 	public searchObject(String fieldEntry, int typeEntry, boolean findHealthStore, boolean findJunkStore){
-		searchField = fieldEntry;
-		searchType = typeEntry;
-		searchStoreTypes[0] = findHealthStore;
-		searchStoreTypes[1] = findJunkStore;
+		this.searchField = searchField;
+		this.searchType = searchType;
+		this.searchStoreTypes[0] = findHealthStore;
+		this.searchStoreTypes[1] = findJunkStore;
 	}
 
 	// Getters and setters below
