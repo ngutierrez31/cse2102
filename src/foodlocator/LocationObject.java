@@ -13,10 +13,11 @@ public class LocationObject {
 	private String 	storeStreetAddress;	// E.g. 123 Place Drive, Storrs CT
 	private int 	storeType;			// 0 = Health, 1 = Junk
 	private float 	storeDistance;		// Initialize to -1, populate with a value in miles when applicable
+	private String	storePhone;			
 	
 	// Constructors
 	public LocationObject(	String storeName, float storeLat, float storeLong, int storeZipcode,
-							String storeStreetAddress, int storeType, float storeDistance) {
+							String storeStreetAddress, int storeType, float storeDistance, String storePhone) {
 		this.storeName = storeName;
 		this.storeLat = storeLat;
 		this.storeLong = storeLong;
@@ -24,6 +25,7 @@ public class LocationObject {
 		this.storeStreetAddress = storeStreetAddress;
 		this.storeType = storeType;
 		this.storeDistance = storeDistance;
+		this.storePhone = storePhone;
 	}
 	
 	public LocationObject(){
@@ -75,6 +77,12 @@ public class LocationObject {
 		this.storeDistance = storeDistance;
 	}
 	
+	public String getStorePhone() {
+		return storePhone;
+	}
 	
+	public void setStorePhone(String storePhone) {
+		this.storePhone = storePhone;
+	}
 	
 }
