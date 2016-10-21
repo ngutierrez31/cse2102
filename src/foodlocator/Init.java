@@ -253,7 +253,7 @@ public class Init extends Application {
 		resultPane.add(partThreeText1,		2,0,2,1);
 		resultPane.add(partThreeText2,		2,1,2,1);
 		resultPane.add(partThreeTable,		0,2,5,3);
-		
+
 		// This launches the actual window, once all is said and done
 		currentStage.show();
 	}

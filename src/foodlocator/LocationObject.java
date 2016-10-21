@@ -26,6 +26,10 @@ public class LocationObject {
 		this.storeDistance = storeDistance;
 	}
 	
+	public LocationObject(){
+		// Empty object
+	}
+	
 	// Getters and setters
 	public String getStoreName() {
 		return storeName;
