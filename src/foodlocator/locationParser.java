@@ -27,6 +27,11 @@ public class locationParser {
 		// Example string: -149.95038,61.13712,"McDonalds-Anchorage,AK","3828 W Dimond Blvd, Anchorage,AK, (907) 248-0597"
 		// Delimited string: -149.95038, 61.13712, McDonalds, Anchorage, AK, 3828 W Dimond Blvd, Anchorage, AK, (907) 248-0597
 		// Useful site: https://regex101.com/
+		
+		// NOTE: The following approach might prove non-expandable!
+		// Currently delimits assuming everything has the same amount of hyphens, quote-marks, etc.
+		// Might be better to delimit into two two floats, then two strings, and work from there.
+		
 		Scanner sc = new Scanner(lineIn).useDelimiter(",|\"|-"); 	//Delimits by the following symbols: , " -
 		longitude = Float.parseFloat(sc.next());
 		latitude = 	Float.parseFloat(sc.next());
