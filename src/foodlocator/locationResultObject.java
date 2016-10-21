@@ -1,5 +1,7 @@
 package foodlocator;
 
+// Might not be necessary; just use a list of Location objects?
+
 public class locationResultObject {
 
 	private String storeName;	// Name of the store. E.g. Wholefoods, McDonalds
