@@ -18,6 +18,11 @@ import javafx.event.EventHandler;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Cell;
 
 /* Software map:
  *  - Init (launches the GUI)
@@ -181,6 +186,14 @@ public class Init extends Application {
 		Button searchButton = new Button("Go");
 		searchButton.setPrefWidth(width/8);
 		searchButton.setPrefHeight(height/32);	
+		searchButton.setOnAction(
+				new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event){
+						currentStage.setScene(resultScene);
+						currentStage.setTitle("Resuts:");
+					}
+				}
+			);
 		
 		TextField searchField = new TextField();
 		
@@ -199,29 +212,47 @@ public class Init extends Application {
 		// searchPane.add(changeTypeButton,1,9,7,1);
 		
 		/// Define the part 3 elements
+		
+		// Results for:
 		final Text partThreeText1 = new Text( width/32, height/16, "Results for:");
 		partThreeText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
 		
+		// Address blank
+		final Text partThreeText2 = new Text( width/32, height/16, "<<address>>");
+		partThreeText1.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
+		
+		// Back button
 		Button partThreeBackButton = new Button("< Back");
 		partThreeBackButton.setPrefWidth(width*3/8);
 		partThreeBackButton.setPrefHeight(height/8);
 		
 		partThreeBackButton.setOnAction(
-				new EventHandler<ActionEvent>(){
-					public void handle(ActionEvent event){
-						currentStage.setScene(searchScene);
-						if (type[0] == 0){
-							currentStage.setTitle("Search by zip code");
-							partTwoText2.setText("food in this zip code:");
-							
-						} else if (type[1] == 1){
-							currentStage.setTitle("Search by address:");
-							partTwoText2.setText("food near this address:");
-						}
+			new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event){
+					currentStage.setScene(searchScene);
+					if (type[0] == 0){
+						currentStage.setTitle("Search by zip code");
+						partTwoText2.setText("food in this zip code:");
+						
+					} else if (type[1] == 1){
+						currentStage.setTitle("Search by address:");
+						partTwoText2.setText("food near this address:");
 					}
 				}
-			);
-
+			}
+		);
+		
+		// Table
+		TableView<String> partThreeTable = new TableView<String>();
+		TableColumn storeName = new TableColumn("Name");
+		TableColumn storeAddress = new TableColumn("Address");
+		partThreeTable.getColumns().addAll(storeName,storeAddress);
+		
+		
+		resultPane.add(partThreeBackButton,	0,0,2,2);
+		resultPane.add(partThreeText1,		2,0,2,1);
+		resultPane.add(partThreeText2,		2,1,2,1);
+		resultPane.add(partThreeTable,		0,2,5,3);
 		
 		// This launches the actual window, once all is said and done
 		currentStage.show();
