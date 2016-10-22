@@ -24,6 +24,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Cell;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+
 /* Software map:
  *  - Init (launches the GUI)
  *  - "Search" class with relevant builders
@@ -183,6 +191,7 @@ public class Init extends Application {
 		CheckBox partTwoJunk 	= new CheckBox("Junk");
 		
 		// TODO: Add search box functionality
+		// TODO: This throws an error, fix it
 		Button searchButton = new Button("Go");
 		searchButton.setPrefWidth(width/8);
 		searchButton.setPrefHeight(height/32);	
@@ -211,8 +220,9 @@ public class Init extends Application {
 		searchPane.add(searchButton,	5,7,1,1);
 		// searchPane.add(changeTypeButton,1,9,7,1);
 		
-		/// Define the part 3 elements
 		
+		
+		/// Define the part 3 elements
 		// Results for:
 		final Text partThreeText1 = new Text( width/32, height/16, "Results for:");
 		partThreeText1.setFont(Font.font("Arial", FontWeight.NORMAL, 30));
@@ -226,6 +236,7 @@ public class Init extends Application {
 		partThreeBackButton.setPrefWidth(width*3/8);
 		partThreeBackButton.setPrefHeight(height/8);
 		
+		// Some kind of error here :(
 		partThreeBackButton.setOnAction(
 			new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent event){
@@ -243,10 +254,47 @@ public class Init extends Application {
 		);
 		
 		// Table
-		TableView<String> partThreeTable = new TableView<String>();
+		// Documentation:
+		// 	http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
+		TableView<LocationObject> partThreeTable = new TableView<LocationObject>();
 		TableColumn storeName = new TableColumn("Name");
+		storeName.setMinWidth(120);
 		TableColumn storeAddress = new TableColumn("Address");
+		storeAddress.setMinWidth(320);
+		// partThreeTable.getColumns().addAll(storeName,storeAddress);
+		
+		// Testing this up
+		partThreeTable.setEditable(true);
+		
+		final ObservableList<LocationObject> data = FXCollections.observableArrayList(
+			new LocationObject("Wembles",1,1,12345,"123 Placestreet",
+								1,-1,"(123) 456-7890"),
+			new LocationObject("Wembles",1,1,12345,"123 Placestreet",
+					1,-1,"(123) 456-7890"),
+			new LocationObject("Wembles",1,1,12345,"127 Locationdrive",
+					1,-1,"(123) 456-7890"),
+			new LocationObject("Wembles",1,1,12345,"NaN Otheraddress",
+					1,-1,"(123) 456-7890")
+				
+		);
+		
+		storeName.setCellValueFactory(
+				new PropertyValueFactory<LocationObject, String>("Store")
+				);
+		
+		storeAddress.setCellValueFactory(
+				new PropertyValueFactory<LocationObject, String>("Address")
+				);
+		
+		partThreeTable.setItems(data);
 		partThreeTable.getColumns().addAll(storeName,storeAddress);
+		
+		/*
+		 * 	String	storeName,			float	storeLat,
+		 *  float	storeLong,			int		storeZipcode, 
+		 *	String	storeStreetAddress,	int		storeType,
+		 *	float	storeDistance,		String	storePhone
+		 */
 		
 		
 		resultPane.add(partThreeBackButton,	0,0,2,2);
