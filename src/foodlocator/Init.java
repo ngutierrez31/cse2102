@@ -44,7 +44,7 @@ import javafx.scene.control.Label;
 
 /* Todo for Tristan:
  *  - Finish this Pane 3 preliminary work:
- *   - Make locationResultObject constructor and used that in the
+ *   - Make LocationResultObject constructor and used that in the
  *     observable list on line 90
  *   - Finish the locationResultObject SimpleStringProperty stuff
  *   - Get the list to display the data, like example 12-4 on the Oracle docs
@@ -58,10 +58,10 @@ public class Init extends Application {
 		launch(args);
 	}
 	
-	TableView<locationResultObject> partThreeTable = new TableView<locationResultObject>();
+	TableView<LocationResultObject> partThreeTable = new TableView<LocationResultObject>();
 	
 	// TODO: This is only for testing this out; we need to be able to add to this list!
-	final ObservableList<locationResultObject> data = FXCollections.observableArrayList(
+	final ObservableList<LocationResultObject> data = FXCollections.observableArrayList(
 			// TODO: Make constructors for this!!
 				
 		);
@@ -301,11 +301,11 @@ public class Init extends Application {
 		partThreeTable.setEditable(true);
 		
 		storeName.setCellValueFactory(
-				new PropertyValueFactory<locationResultObject, String>("Store")
+				new PropertyValueFactory<LocationResultObject, String>("Store")
 				);
 		
 		storeAddress.setCellValueFactory(
-				new PropertyValueFactory<locationResultObject, String>("Address")
+				new PropertyValueFactory<LocationResultObject, String>("Address")
 				);
 		
 		
