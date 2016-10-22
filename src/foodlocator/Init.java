@@ -42,12 +42,29 @@ import javafx.scene.control.Label;
  *  - Test clients for interface modules
  */
 
+/* Todo for Tristan:
+ *  - Finish this Pane 3 preliminary work:
+ *   - Make locationResultObject constructor and used that in the
+ *     observable list on line 90
+ *   - Finish the locationResultObject SimpleStringProperty stuff
+ *   - Get the list to display the data, like example 12-4 on the Oracle docs
+ *  - Finish CSV Parser
+ *  - Work on the DB generator
+ */
 
 public class Init extends Application {
 	
 	public static void main(String[] args){
 		launch(args);
 	}
+	
+	TableView<locationResultObject> partThreeTable = new TableView<locationResultObject>();
+	
+	// TODO: This is only for testing this out; we need to be able to add to this list!
+	final ObservableList<locationResultObject> data = FXCollections.observableArrayList(
+			// TODO: Make constructors for this!!
+				
+		);
 	
 	public void start(Stage initialStage){
 	
@@ -256,7 +273,24 @@ public class Init extends Application {
 		// Table
 		// Documentation:
 		// 	http://docs.oracle.com/javafx/2/ui_controls/table-view.htm
-		TableView<LocationObject> partThreeTable = new TableView<LocationObject>();
+		/*
+		TableView<locationResultObject> partThreeTable = new TableView<locationResultObject>();
+		
+		// TODO: This is only for testing this out; we need to be able to add to this list!
+		final ObservableList<locationResultObject> data = FXCollections.observableArrayList(
+				new locationResultObject("Wembles",1,1,12345,"123 Placestreet",
+									1,-1,"(123) 456-7890"),
+				new locationResultObject("Wembles",1,1,12345,"123 Placestreet",
+						1,-1,"(123) 456-7890"),
+				new locationResultObject("Wembles",1,1,12345,"127 Locationdrive",
+						1,-1,"(123) 456-7890"),
+				new locationResultObject("Wembles",1,1,12345,"NaN Otheraddress",
+						1,-1,"(123) 456-7890")
+					
+			);
+		*/
+		// TODO: Find a way to have the above code *not* outside of start
+		
 		TableColumn storeName = new TableColumn("Name");
 		storeName.setMinWidth(120);
 		TableColumn storeAddress = new TableColumn("Address");
@@ -266,25 +300,14 @@ public class Init extends Application {
 		// Testing this up
 		partThreeTable.setEditable(true);
 		
-		final ObservableList<LocationObject> data = FXCollections.observableArrayList(
-			new LocationObject("Wembles",1,1,12345,"123 Placestreet",
-								1,-1,"(123) 456-7890"),
-			new LocationObject("Wembles",1,1,12345,"123 Placestreet",
-					1,-1,"(123) 456-7890"),
-			new LocationObject("Wembles",1,1,12345,"127 Locationdrive",
-					1,-1,"(123) 456-7890"),
-			new LocationObject("Wembles",1,1,12345,"NaN Otheraddress",
-					1,-1,"(123) 456-7890")
-				
-		);
-		
 		storeName.setCellValueFactory(
-				new PropertyValueFactory<LocationObject, String>("Store")
+				new PropertyValueFactory<locationResultObject, String>("Store")
 				);
 		
 		storeAddress.setCellValueFactory(
-				new PropertyValueFactory<LocationObject, String>("Address")
+				new PropertyValueFactory<locationResultObject, String>("Address")
 				);
+		
 		
 		partThreeTable.setItems(data);
 		partThreeTable.getColumns().addAll(storeName,storeAddress);
