@@ -7,10 +7,10 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class LocationResultObject {
 
-	private SimpleStringProperty storeName;		// Name of the store. E.g. Wholefoods, McDonalds
-	private SimpleStringProperty storeAddress;	// Address of the store
-	private SimpleStringProperty storeDistance;	// Distance from user; -1 if searching within zip code
-	private SimpleStringProperty storePhone;	
+	private SimpleStringProperty storeName = new SimpleStringProperty("");		// Name of the store. E.g. Wholefoods, McDonalds
+	private SimpleStringProperty storeAddress = new SimpleStringProperty("");	// Address of the store
+	private SimpleStringProperty storeDistance = new SimpleStringProperty("");	// Distance from user; -1 if searching within zip code
+	private SimpleStringProperty storePhone  = new SimpleStringProperty("");	
 	
 
 	// Constructors
