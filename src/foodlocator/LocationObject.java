@@ -13,7 +13,17 @@ public class LocationObject {
 	private String 	storeStreetAddress;	// E.g. 123 Place Drive, Storrs CT
 	private int 	storeType;			// 0 = Health, 1 = Junk
 	private float 	storeDistance;		// Initialize to -1, populate with a value in miles when applicable
-	private String	storePhone;			
+	private String	storePhone;
+	
+	/* storeName
+	 * storeLat
+	 * storeLong
+	 * storeZipcode
+	 * storeStreetAddress
+	 * storeType
+	 * storeDistance
+	 * storePhone
+	 */
 	
 	// Constructors
 	public LocationObject(	String storeName, float storeLat, float storeLong, int storeZipcode,
