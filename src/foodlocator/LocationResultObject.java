@@ -30,32 +30,32 @@ public class LocationResultObject {
 	}
 
 	// Getters and setters below
-	public SimpleStringProperty getStoreName() {
-		return storeName;
+	public String getStoreName() {
+		return storeName.get();
 	}
 
 	public void setStoreName(String storeName) {
 		this.storeName.set("storeName");
 	}
 
-	public SimpleStringProperty getStoreAddress() {
-		return storeAddress;
+	public String getStoreAddress() {
+		return storeAddress.get();
 	}
 
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress.set(storeAddress);
 	}
 
-	public SimpleStringProperty getStoreDistance() {
-		return storeDistance;
+	public String getStoreDistance() {
+		return storeDistance.get();
 	}
 
 	public void setStoreDistance(float storeDistance) {
 		this.storeDistance.set("" + storeAddress);
 	}
 	
-	public SimpleStringProperty getStorePhone() {
-		return storePhone;
+	public String getStorePhone() {
+		return storePhone.get();
 	}
 
 	public void setStorePhone(SimpleStringProperty storePhone) {
