@@ -57,23 +57,39 @@ public class locationParser {
 		zipcode = "ERROR";		// If this comes out as ERROR, then it did not manage to get set below.
 		
 		// Example string: -149.95038,61.13712,"McDonalds-Anchorage,AK","3828 W Dimond Blvd, Anchorage,AK, (907) 248-0597"
-		// Delimited string: -149.95038, 61.13712, McDonalds, Anchorage, AK, 3828 W Dimond Blvd, Anchorage, AK, (907) 248-0597
 		// Useful site: https://regex101.com/
 		
 		// NOTE: The following approach might prove non-expandable!
 		// Currently delimits assuming everything has the same amount of hyphens, quote-marks, etc.
 		// Might be better to delimit into two two floats, then two strings, and work from there.
 		
-		Scanner sc = new Scanner(lineIn).useDelimiter(",|\"|-"); 	//Delimits by the following symbols: , " -
+		
+		// TODO: Replace this with better csv handling
+		Scanner sc = new Scanner(lineIn).useDelimiter("\""); 	//Delimits by the following symbols: , " -
+		String longlat = sc.next(); 			//-149.95038,61.13712,	
+		String namestate = sc.next();			//McDonalds-Anchorage,AK
+		sc.next(); 								//,
+		String addressphone = sc.next(); 		//3828 W Dimond Blvd, Anchorage,AK, (907) 248-0597
+		sc.close();
+		
+		sc = new Scanner(longlat).useDelimiter(",");
 		longitude = Float.parseFloat(sc.next());
-		latitude = 	Float.parseFloat(sc.next());
+		latitude = Float.parseFloat(sc.next());
+		sc.close();
+		
+		sc = new Scanner(namestate).useDelimiter(",|-");
 		name = sc.next();
-		sc.next(); sc.next();
-		address = 	sc.next() + ", " + sc.next() + ", " + sc.next();
-		phone = 	sc.next() + " " + sc.next() + "-" + sc.next();
+		sc.close();
+		
+		// Tested: This part works fine. The address being passed to the GAP is ok
+		sc = new Scanner(addressphone).useDelimiter("\\(");
+		address = sc.next();
+		phone = "(" + sc.next();
+		sc.close();
 		
 		// Get XML by putting address into the Google URL
 		String search = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=" + APIKEY;
+		System.out.print("\n Search string: \n " + search + "\n");
 		try {
 			URL search_url = new URL(search);
 			// This is how you instantiate a document builder factory
@@ -81,7 +97,7 @@ public class locationParser {
 			try {
 				DocumentBuilder	db_build = db_fact.newDocumentBuilder();
 				try {
-					Document doc = db_build.parse(search_url.openStream());
+					Document doc = db_build.parse(search_url.openStream()); //TODO: Fix IOException on this line!!
 					
 					Element root = doc.getDocumentElement();
 					

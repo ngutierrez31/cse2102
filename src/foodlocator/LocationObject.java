@@ -95,4 +95,16 @@ public class LocationObject {
 		this.storePhone = storePhone;
 	}
 	
+	public void printAll(){
+		print("Location Object information:\n ");
+		print(this.getStoreName() + " at " + this.getStoreStreetAddress() + ", " + storeZipcode + "\n");
+		print(" Geocode: " + getStoreLong() + ", " + getStoreLat() + "; " + getStoreDistance() + " miles away.\n");
+		print(" Type: " + getStoreType() + "; Phone: " + getStorePhone());
+		print("\n");
+	}
+	
+	private static void print(String in){
+		System.out.print(in);
+	}
+	
 }
