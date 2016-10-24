@@ -3,6 +3,10 @@ package foodlocator;
 public class LocationParserTestClient {
 
 	public static void main(String[] args) {
+		/*
+		print("!! Testing the csv parser! \n Compare the zips:");
+		
+		
 		String csv1 = "-73.285156,45.333186,\"BurgerKing-Saint Jean Chrysostome,QC\",\"645B Rue Commerciale, Saint Jean Chrysostome,QC, (418) 834-3238\"";
 		String csv2 = "-81.83332,38.47445,\"McDonalds-Winfield,WV\",\"3403 Winfield Rd, Winfield,WV, (304) 586-0385\"";
 		String csv3 = "-73.800255,45.487267,\"Wendy's-Dollard Ormeaux,PQ\",\"3600 Sources Rd., Dollard Ormeaux,PQ H9B 1Z9 CA, (514) 683-6263\"";
@@ -11,7 +15,7 @@ public class LocationParserTestClient {
 		String csvzip2 = "25213";
 		String csvzip3 = "H9B 1Z9";
 		
-		print("Compare the zips:");
+		
 		
 		LocationObject csv1_obj = locationParser.csvParser(csv1);
 		LocationObject csv2_obj = locationParser.csvParser(csv2);
@@ -24,6 +28,31 @@ public class LocationParserTestClient {
 		csv1_obj.printAll();
 		csv2_obj.printAll();
 		csv3_obj.printAll();
+		
+		*/
+		
+		print ("\n\n!! Testing the txt parser! \n Compare the long/lats:");
+		
+		String txt1 = "2217 S Shore Ctr Alameda, CA  94501, Phone: 510-769-5450 ";
+		String txt2 = "1411 E. Renner Road Richardson, TX 75082, Phone:  214.273.0902";
+		String txt3 = "1333 Newell Ave Walnut Creek, CA 94596, Phone:  925.274.9700";
+		
+		String txtcode1 = "37.7563752, -122.2528046";
+		String txtcode2 = "32.9988408, -96.6987141";
+		String txtcode3 = "37.8928784, -122.0555321";
+		
+		LocationObject txt1_obj = locationParser.txtParser("NAME GOES HERE", txt1);
+		LocationObject txt2_obj = locationParser.txtParser("NAME GOES HERE", txt2);
+		LocationObject txt3_obj = locationParser.txtParser("NAME GOES HERE", txt3);
+		
+		print(txtcode1 + " : " + txt1_obj.getStoreLat() + ", " + txt1_obj.getStoreLong());
+		print(txtcode2 + " : " + txt2_obj.getStoreLat() + ", " + txt2_obj.getStoreLong());
+		print(txtcode3 + " : " + txt3_obj.getStoreLat() + ", " + txt3_obj.getStoreLong());
+
+		txt1_obj.printAll();
+		txt2_obj.printAll();
+		txt3_obj.printAll();
+		
 	}
 
 	public static void print(String input){
