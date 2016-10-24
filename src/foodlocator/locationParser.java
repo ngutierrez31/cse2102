@@ -107,16 +107,33 @@ public class locationParser {
 					Document doc = db_build.parse(search_url.openStream()); //TODO: Fix IOException on this line!!
 					
 					Element root = doc.getDocumentElement();
-					
 					NodeList list = doc.getElementsByTagName("address_component"); //Each address component has a long_name, short_name, and then types. We want the one with type postal_code
+					/* <GeocodeResponse>
+					 *  <status>OK</status>
+					 *  <result>
+					 *   <type>, some other stuff
+					 *   <address_component> </address_component>, a few of these
+					 *   What we want:
+					 *   <address_component>
+					 *	  <long_name>06339</long_name>
+					 *	  <short_name>06339</short_name>
+					 *	  <type>postal_code</type>
+					 *	 </address_component>
+					 *   <geometry> stuff </geometry>
+					 *   <place_id> stuff </place_id>
+					 *  </result>
+					 * </GeocodeResponse>
+					 */
 					
+					/*
 					for (int ii = 0; ii < list.getLength(); ii ++){
 						Node listNode = list.item(ii);
 						if (listNode.getNodeType() == Node.ELEMENT_NODE){ // If this is a node that is actually an element...
-							Element listNodeElement = (Element) listNode; // 
+							Element listNodeElement = (Element) listNode;
 							zipcode = listNodeElement.getElementsByTagName("postal_code").item(0).getTextContent();
 						}
 					}
+					*/
 					
 				} catch (SAXException e){
 					System.out.println("SAXException in locationParser! doc is messed up :(");
