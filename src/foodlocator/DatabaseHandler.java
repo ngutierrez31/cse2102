@@ -119,7 +119,7 @@ public class DatabaseHandler {
 					
 					Add = sc.next();
 					System.out.println("Zip:  " + Add);
-					top.setStoreZipcode	(Integer.parseInt(Add));
+					top.setStoreZipcode	(Add);
 					
 					Add = sc.next();
 					System.out.println("Addr: " + Add);

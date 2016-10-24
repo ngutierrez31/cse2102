@@ -9,7 +9,7 @@ public class LocationObject {
 	private String 	storeName;			// E.g. Wendy's
 	private float 	storeLat;			// Geocode
 	private float 	storeLong;
-	private int 	storeZipcode;
+	private String 	storeZipcode;
 	private String 	storeStreetAddress;	// E.g. 123 Place Drive, Storrs CT
 	private int 	storeType;			// 0 = Health, 1 = Junk
 	private float 	storeDistance;		// Initialize to -1, populate with a value in miles when applicable
@@ -26,7 +26,7 @@ public class LocationObject {
 	 */
 	
 	// Constructors
-	public LocationObject(	String storeName, float storeLat, float storeLong, int storeZipcode,
+	public LocationObject(	String storeName, float storeLat, float storeLong, String storeZipcode,
 							String storeStreetAddress, int storeType, float storeDistance, String storePhone) {
 		this.storeName = storeName;
 		this.storeLat = storeLat;
@@ -62,10 +62,10 @@ public class LocationObject {
 	public void setStoreLong(float storeLong) {
 		this.storeLong = storeLong;
 	}
-	public int getStoreZipcode() {
+	public String getStoreZipcode() {
 		return storeZipcode;
 	}
-	public void setStoreZipcode(int storeZipcode) {
+	public void setStoreZipcode(String storeZipcode) {
 		this.storeZipcode = storeZipcode;
 	}
 	public String getStoreStreetAddress() {

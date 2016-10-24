@@ -48,13 +48,13 @@ public class locationParser {
 		float 	longitude;	// Geocode orders are lat/long, but we get long/lat first.
 		float 	latitude;		
 		String 	name;		//E.g. McDonalds
-		int		zipcode;	// Get THIS from GOOGLE
+		String	zipcode;	// Get THIS from GOOGLE
 		int 	type;		// 0 is healthy, 1 is junkfood
 		String	address;	// E.g 3828 W Dimond Blvd, Anchorage,AK
 		String	phone;
 		type = 1;		// Junk foods are in csv files
 		
-		zipcode = -1;		// If this comes out as -1, then it did not manage to get set below.
+		zipcode = "ERROR";		// If this comes out as ERROR, then it did not manage to get set below.
 		
 		// Example string: -149.95038,61.13712,"McDonalds-Anchorage,AK","3828 W Dimond Blvd, Anchorage,AK, (907) 248-0597"
 		// Delimited string: -149.95038, 61.13712, McDonalds, Anchorage, AK, 3828 W Dimond Blvd, Anchorage, AK, (907) 248-0597
@@ -71,8 +71,6 @@ public class locationParser {
 		sc.next(); sc.next();
 		address = 	sc.next() + ", " + sc.next() + ", " + sc.next();
 		phone = 	sc.next() + " " + sc.next() + "-" + sc.next();
-		
-		String zipcode_string = "";
 		
 		// Get XML by putting address into the Google URL
 		String search = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=" + APIKEY;
@@ -93,9 +91,8 @@ public class locationParser {
 						Node listNode = list.item(ii);
 						if (listNode.getNodeType() == Node.ELEMENT_NODE){ // If this is a node that is actually an element...
 							Element listNodeElement = (Element) listNode; // 
-							zipcode_string = listNodeElement.getElementsByTagName("postal_code").item(0).getTextContent();
+							zipcode = listNodeElement.getElementsByTagName("postal_code").item(0).getTextContent();
 							
-							zipcode = Integer.parseInt(zipcode_string);	// FINALLY
 						}
 					}
 					

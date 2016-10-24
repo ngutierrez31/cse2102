@@ -3,9 +3,9 @@ package foodlocator;
 public class DatabaseTestClient {
 
 	public static void main(String[] args) {
-		LocationObject Location1 = new LocationObject("Wendys", 	(float) 12.34, (float) 56.78, 12345, "123 Placeland Drive", 1, (float) 13.1, "(860)-444-4444");
-		LocationObject Location2 = new LocationObject("Wholefoods", (float) 13.37, (float) 7.20, 90210,  "456 Cooly Avenue", 	2, (float) 2.3,  "(860)-555-5555");
-		LocationObject Location3 = new LocationObject("Pamble", 	(float) 14.37, (float) 17.20, 6269, "789 Plagle Avenue", 	3, (float) 5.2,  "(123)-456-7890");
+		LocationObject Location1 = new LocationObject("Wendys", 	(float) 12.34, (float) 56.78, "12345", "123 Placeland Drive", 1, (float) 13.1, "(860)-444-4444");
+		LocationObject Location2 = new LocationObject("Wholefoods", (float) 13.37, (float) 7.20, "90210",  "456 Cooly Avenue", 	2, (float) 2.3,  "(860)-555-5555");
+		LocationObject Location3 = new LocationObject("Pamble", 	(float) 14.37, (float) 17.20, "6269", "789 Plagle Avenue", 	3, (float) 5.2,  "(123)-456-7890");
 		
 		DatabaseHandler DB = new DatabaseHandler();
 		
