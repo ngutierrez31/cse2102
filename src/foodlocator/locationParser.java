@@ -89,6 +89,13 @@ public class locationParser {
 		
 		// Get XML by putting address into the Google URL
 		String search = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=" + APIKEY;
+		sc = new Scanner(search).useDelimiter(" ");
+		String empty_search = "";
+		while (sc.hasNext()){
+			empty_search = empty_search + sc.next() + "%20";
+		}
+		search = empty_search;
+		sc.close();
 		System.out.print("\n Search string: \n " + search + "\n");
 		try {
 			URL search_url = new URL(search);
@@ -108,7 +115,6 @@ public class locationParser {
 						if (listNode.getNodeType() == Node.ELEMENT_NODE){ // If this is a node that is actually an element...
 							Element listNodeElement = (Element) listNode; // 
 							zipcode = listNodeElement.getElementsByTagName("postal_code").item(0).getTextContent();
-							
 						}
 					}
 					
@@ -116,6 +122,7 @@ public class locationParser {
 					System.out.println("SAXException in locationParser! doc is messed up :(");
 				} catch (IOException e){
 					System.out.println("IOException in locationParser! doc is messed up :(");
+					e.printStackTrace();
 				}
 				
 			} catch (ParserConfigurationException e){
