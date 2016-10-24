@@ -50,11 +50,11 @@ public class locationParser {
 		sc.close();
 		
 		sc = new Scanner(badphone);
-		phone = sc.next();
+		sc.next(); phone = sc.next();
 		sc.close();
 		
-		longitude = XmlParser.getLong(lineIn);
-		latitude = XmlParser.getLat(lineIn);
+		longitude = XmlParser.getLong(address);
+		latitude = XmlParser.getLat(address);
 		
 		LocationObject result = new LocationObject(name, latitude, longitude, zipcode, address, type, -1, phone);
 		return result;

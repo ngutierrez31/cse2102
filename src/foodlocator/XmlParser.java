@@ -29,59 +29,13 @@ public class XmlParser {
 	// getLat, getLong, and subsequently, getGeocode, all untested!
 	
 	public static float getLat(String address_in){
-		return Float.parseFloat(getElement(address_in,"/GeocodeResponse/result/geometry/location/","lat"));
+		return Float.parseFloat(getElement(address_in,"//location/lat/text()",""));
 	}
 	
 	public static float getLong(String address_in){
-		return Float.parseFloat(getElement(address_in,"/GeocodeResponse/result/geometry/location/","lng"));
+		return Float.parseFloat(getElement(address_in,"//location/lng/text()",""));
 	}
-	/*
-	public static Float[] getGeocode(String address_in){
-		// Accepts an address string that looks like "14100 Lee Hwy Centreville"
-		Float[] geocode = new Float[2];
-		geocode[0] = getLat(address_in);
-		geocode[1] = getLat(address_in);
-		
-		return geocode;
-	}
-	 */
-	public static String[] getElementList(String address_in, String elementpath){
-
-		InputSource xml_in = getIS(address_in);
-		
-		XPathFactory factory = XPathFactory.newInstance();
-		
-		XPath xpath = factory.newXPath();
-		
-		String[] elements_out = null;
-		
-		try {
-			NodeList elements = (NodeList) xpath.evaluate(elementpath,
-											xml_in, XPathConstants.NODESET);
-			elements_out = new String[elements.getLength()];
-			
-			
-			// TODO: This is where it fails! Oddly, it fails to even enter the loop
-			
-			for (int i = 0; i < elements.getLength(); i ++){
-			
-				System.out.println("i: " + i);
-				elements_out[i] = elements.item(i).getTextContent();
-				System.out.println("### Element #" + i + ": " + elements.item(i).getTextContent());
-			}
-			
-		} catch (XPathExpressionException e) {
-			System.out.println("XPathExpressionException!");
-		}
-		
-		
-		
-		return elements_out;
-		
-
-	}
-	
-	public static String getElement(String address_in, String elementpath, String element){
+		public static String getElement(String address_in, String elementpath, String element){
 	
 			InputSource xml_in = getIS(address_in);
 			
@@ -89,9 +43,10 @@ public class XmlParser {
 			
 			XPath xpath = factory.newXPath();
 			
-			String element_out = "";
+			String element_out = "1234";
 			
 			try {
+				// TODO: THIS IS WHERE IT IS FAILING. xpath is evaluating something here as empty.
 				element_out =  xpath.evaluate(elementpath + element,
 												xml_in);
 			} catch (XPathExpressionException e) {
@@ -111,6 +66,7 @@ public class XmlParser {
 	
 	private static URL getUrl(String address_in){
 		String search_string = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + fixAddress(address_in)+ "&key=" + APIKEY;
+
 		try {
 			return new URL(search_string);
 		} catch (MalformedURLException e){
