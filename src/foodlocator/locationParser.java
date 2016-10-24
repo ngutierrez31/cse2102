@@ -2,8 +2,38 @@ package foodlocator;
 
 import java.util.Scanner;
 
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.*;
+import java.io.*;
+import java.net.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import javax.xml.parsers.ParserConfigurationException;
+import java.net.MalformedURLException;
+
+/*import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.File;
+*/
+/*
+import javax.lang.model.element.Element;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+*/
+
 public class locationParser {
 
+	private static String APIKEY = "AIzaSyBq_j2SJHZj7trix3uZW3IH-859UXN5skQ";
+	
 	public static LocationObject txtParser(String lineIn){
 		// TODO: Content
 		// The below lines are so Eclipse doesn't complete. (Won't compile if this doesn't return a Location
@@ -24,6 +54,8 @@ public class locationParser {
 		String	phone;
 		type = 1;		// Junk foods are in csv files
 		
+		zipcode = -1;		// If this comes out as -1, then it did not manage to get set below.
+		
 		// Example string: -149.95038,61.13712,"McDonalds-Anchorage,AK","3828 W Dimond Blvd, Anchorage,AK, (907) 248-0597"
 		// Delimited string: -149.95038, 61.13712, McDonalds, Anchorage, AK, 3828 W Dimond Blvd, Anchorage, AK, (907) 248-0597
 		// Useful site: https://regex101.com/
@@ -40,9 +72,75 @@ public class locationParser {
 		address = 	sc.next() + ", " + sc.next() + ", " + sc.next();
 		phone = 	sc.next() + " " + sc.next() + "-" + sc.next();
 		
-		// TODO : GET ZIPCODE USING GOOGLE
-		zipcode = 00000; //Temporary
+		String zipcode_string = "";
 		
+		// Get XML by putting address into the Google URL
+		String search = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=" + APIKEY;
+		try {
+			URL search_url = new URL(search);
+			// This is how you instantiate a document builder factory
+			DocumentBuilderFactory db_fact = DocumentBuilderFactory.newInstance();
+			try {
+				DocumentBuilder	db_build = db_fact.newDocumentBuilder();
+				try {
+					Document doc = db_build.parse(search_url.openStream());
+					
+					Element root = doc.getDocumentElement();
+					
+					NodeList list = doc.getElementsByTagName("address_component"); //Each address component has a long_name, short_name, and then types. We want the one with type postal_code
+					
+					for (int ii = 0; ii < list.getLength(); ii ++){
+						Node listNode = list.item(ii);
+						if (listNode.getNodeType() == Node.ELEMENT_NODE){ // If this is a node that is actually an element...
+							Element listNodeElement = (Element) listNode; // 
+							zipcode_string = listNodeElement.getElementsByTagName("postal_code").item(0).getTextContent();
+							
+							zipcode = Integer.parseInt(zipcode_string);	// FINALLY
+						}
+					}
+					
+				} catch (SAXException e){
+					System.out.println("SAXException in locationParser! doc is messed up :(");
+				} catch (IOException e){
+					System.out.println("IOException in locationParser! doc is messed up :(");
+				}
+				
+			} catch (ParserConfigurationException e){
+				System.out.println("ParserConfigurationException in locationParser! db_build is messed up :(");
+			}
+			/*
+			try {
+				HttpURLConnection gapi_connection = (HttpURLConnection) search_url.openConnection();
+				gapi_connection.setRequestMethod("GET");	//We're asking to get info, not send info
+				gapi_connection.setRequestProperty("Accept", "application/xml"); // I don't understand this; had to get this from Java documentation
+				
+				// To send to the Document Builder
+				InputStream xml = gapi_connection.getInputStream();
+				// This is how you instantiate a document builder factory
+				DocumentBuilderFactory db_fact = DocumentBuilderFactory.newInstance();
+				try {
+					DocumentBuilder	db_build = db_fact.newDocumentBuilder();
+					try {
+						Document doc = db_build.parse(xml);
+						
+						
+						
+					} catch (SAXException e){
+						System.out.println("SAXException in locationParser! doc is messed up :(");
+					}
+					
+				} catch (ParserConfigurationException e){
+					System.out.println("ParserConfigurationException in locationParser! db_build is messed up :(");
+				}
+				
+				
+			} catch (IOException e){
+				System.out.println("IOException in locationParser; HttpURLConnection is messed up :(");
+			}
+			*/
+		} catch (MalformedURLException e){
+			System.out.println("Malformed URL! MalformedURLException in  locationparser; search_url is messed up. :(");
+		}
 		
 		LocationObject result = new LocationObject(name, latitude, longitude, zipcode, address, type, -1, phone); // -1 is distance; change upon search
 		return result;

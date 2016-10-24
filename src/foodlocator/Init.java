@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 
+
 /* Software map:
  *  - Init (launches the GUI)
  *  - "Search" class with relevant builders
@@ -43,6 +44,7 @@ import javafx.scene.control.Label;
  */
 
 public class Init extends Application {
+
 	
 	public static void main(String[] args){
 		launch(args);
