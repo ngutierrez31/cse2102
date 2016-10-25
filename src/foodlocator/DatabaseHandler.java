@@ -40,7 +40,8 @@ public class DatabaseHandler {
 										+ top.getStoreStreetAddress() + delimiter
 										+ top.getStoreType() + delimiter
 										+ top.getStoreDistance() + delimiter
-										+ top.getStorePhone() + delimiter);
+										+ top.getStorePhone() + delimiter
+										+ "\n");
 			}
 			database_out.close();
 		} catch (IOException e){
