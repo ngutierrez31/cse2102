@@ -26,10 +26,10 @@ public class DatabaseHandler {
 	}
 	
 	public void generate(String dbName){
-		// Creates a location_database.txt file, encoding all the LocationObjects stored in the LocationList
+		// Creates a location_database file, encoding all the LocationObjects stored in the LocationList
 		FileWriter database_out = null;
 		try {
-			database_out = new FileWriter(dbName + ".txt");
+			database_out = new FileWriter(dbName);
 			LocationObject top = null;
 			while (!this.isEmpty()){
 				top = this.pop();
@@ -42,7 +42,7 @@ public class DatabaseHandler {
 										+ top.getStoreDistance() + delimiter
 										+ top.getStorePhone());
 				if (!this.isEmpty()){				// So , doesn't get added to the last entry
-					database_out.write(delimiter);  // Alternatively, add a fake, buffer entry?
+					database_out.write(delimiter + "\n");  // Alternatively, add a fake, buffer entry?
 				}
 			}
 			database_out.close();
@@ -53,9 +53,9 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public boolean dbExists(){
+	public boolean dbExists(String databaseName){
 		// Returns true of the file location_database.txt exists
-		return new File("location_database.txt").exists();
+		return new File(databaseName).exists();
 	}
 	
 	public boolean isEmpty(){
@@ -94,13 +94,13 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public void loadFromDatabase(){
+	public void loadFromDatabase(String databaseName){
 		// Populates the LocationList with what was stored in location_database.txt
-		if (this.dbExists()){
+		if (this.dbExists(databaseName)){
 			FileReader database_in = null;
 			BufferedReader br = null;
 			try {
-				database_in = new FileReader("location_database.txt");
+				database_in = new FileReader(databaseName);
 				LocationObject top = new LocationObject();
 				br = new BufferedReader(database_in);
 				Scanner sc = new Scanner(br).useDelimiter(delimiter);
@@ -151,13 +151,13 @@ public class DatabaseHandler {
 				
 			}
 		} else {
-			System.out.println("Error on LoadFromDatabase: location_database.txt does not exist.");
+			System.out.println("Error on LoadFromDatabase: " + databaseName + " does not exist.");
 		}
 	}
 	
-	public void deleteDatabase(){
+	public void deleteDatabase(String databaseName){
 		// Deletes the database file
-		File database = new File("location_database.txt");
+		File database = new File(databaseName);
 		if (database.exists()){
 			database.delete();
 		}
@@ -166,6 +166,10 @@ public class DatabaseHandler {
 	public ArrayList<LocationObject> loadEntire(){
 		// Return the entire Location List
 		return LocationList;
+	}
+	
+	public void close(){
+		
 	}
 	
 }

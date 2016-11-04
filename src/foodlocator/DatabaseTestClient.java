@@ -21,9 +21,9 @@ public class DatabaseTestClient {
 			print("BAD  - DB size not 2");
 		}
 		
-		DB.deleteDatabase();
+		DB.deleteDatabase("test_db");
 		
-		if (DB.dbExists()){
+		if (DB.dbExists("test_db")){
 			print("BAD  - DB should not already exist.");
 		} else {
 			print("GOOD - DB does not already exist.");
@@ -43,7 +43,7 @@ public class DatabaseTestClient {
 		
 		DB.generate("test_db");
 		
-		if (DB.dbExists()){
+		if (DB.dbExists("test_db")){
 			print("GOOD - DB exists after generating.");
 		} else {
 			print("BAD  - DB does not exist after generating");
@@ -60,7 +60,7 @@ public class DatabaseTestClient {
 		DB.add(Location2);
 		
 		print("Loading from database");
-		DB.loadFromDatabase();
+		DB.loadFromDatabase("test_db");
 		
 		
 		print("GOOD - If you got here, the database loaded!");
