@@ -5,13 +5,13 @@ public class DatabaseTestClient {
 	public static void main(String[] args) {
 		LocationObject Location1 = new LocationObject("Wendys", 	(float) 12.34, (float) 56.78, "12345", "123 Placeland Drive", 1, (float) 13.1, "(860)-444-4444");
 		LocationObject Location2 = new LocationObject("Wholefoods", (float) 13.37, (float) 7.20, "90210",  "456 Cooly Avenue", 	2, (float) 2.3,  "(860)-555-5555");
-		LocationObject Location3 = new LocationObject("Pamble", 	(float) 14.37, (float) 17.20, "6269", "789 Plagle Avenue", 	3, (float) 5.2,  "(123)-456-7890");
-		
+		LocationObject Location3 = new LocationObject("Pamble", 	(float) 14.37, (float) 17.20, "06269", "789 Plagle Avenue", 	3, (float) 5.2,  "(123)-456-7890");
+
 		DatabaseHandler DB = new DatabaseHandler();
-		
+
 		print("Starting testing of DatabaseTestClient");
 		print("Adding Locations to database");
-		
+
 		DB.add(Location1);
 		DB.add(Location2);
 		
@@ -41,7 +41,7 @@ public class DatabaseTestClient {
 		
 		print ("Generating database");
 		
-		DB.generate();
+		DB.generate("test_db");
 		
 		if (DB.dbExists()){
 			print("GOOD - DB exists after generating.");
@@ -53,12 +53,15 @@ public class DatabaseTestClient {
 		DB.deleteTop();
 		DB.pop();
 		
-		print("You should see an error relating to DB.pop now and ONLY now.:");
+		print("You should see an error relating to DB.pop now and ONLY now.");
 		DB.pop();
 		
+		print("Adding location 2");
 		DB.add(Location2);
 		
+		print("Loading from database");
 		DB.loadFromDatabase();
+		
 		
 		print("GOOD - If you got here, the database loaded!");
 	}

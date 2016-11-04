@@ -2,23 +2,6 @@ package foodlocator;
 
 import java.util.Scanner;
 
-
-/*import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.File;
-*/
-/*
-import javax.lang.model.element.Element;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-*/
-
 public class locationParser {
 
 	

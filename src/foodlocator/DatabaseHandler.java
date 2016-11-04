@@ -25,11 +25,11 @@ public class DatabaseHandler {
 		return size;
 	}
 	
-	public void generate(){
+	public void generate(String dbName){
 		// Creates a location_database.txt file, encoding all the LocationObjects stored in the LocationList
 		FileWriter database_out = null;
 		try {
-			database_out = new FileWriter("location_database.txt");
+			database_out = new FileWriter(dbName + ".txt");
 			LocationObject top = null;
 			while (!this.isEmpty()){
 				top = this.pop();
@@ -40,8 +40,10 @@ public class DatabaseHandler {
 										+ top.getStoreStreetAddress() + delimiter
 										+ top.getStoreType() + delimiter
 										+ top.getStoreDistance() + delimiter
-										+ top.getStorePhone() + delimiter
-										+ "\n");
+										+ top.getStorePhone());
+				if (!this.isEmpty()){				// So , doesn't get added to the last entry
+					database_out.write(delimiter);  // Alternatively, add a fake, buffer entry?
+				}
 			}
 			database_out.close();
 		} catch (IOException e){
@@ -138,11 +140,10 @@ public class DatabaseHandler {
 					System.out.println("Phone:" + Add);
 					top.setStorePhone	(Add);
 					
-					sc.close();
-					br.close();
 					this.add(top);
 			}
-				
+				sc.close();
+				br.close();
 				database_in .close();
 			} catch (IOException e){
 				System.out.println("IO Exception on DatabaseHandler.LoadFromDatabase()");

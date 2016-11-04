@@ -1,1 +1,1 @@
-Pamble,14.37,17.2,6269,789 Plagle Avenue,3,5.2,(123)-456-7890,Wholefoods,13.37,7.2,90210,456 Cooly Avenue,2,2.3,(860)-555-5555,Wendys,12.34,56.78,12345,123 Placeland Drive,1,13.1,(860)-444-4444,
+Pamble,14.37,17.2,06269,789 Plagle Avenue,3,5.2,(123)-456-7890,Wholefoods,13.37,7.2,90210,456 Cooly Avenue,2,2.3,(860)-555-5555,Wendys,12.34,56.78,12345,123 Placeland Drive,1,13.1,(860)-444-4444
