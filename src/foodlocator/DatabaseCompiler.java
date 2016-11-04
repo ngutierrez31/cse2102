@@ -12,44 +12,43 @@ public class DatabaseCompiler {
 	// Sends a bunch of strings from a txt or csv file to the appropriate locationParser.
 	// Takes the LocationObject from that locationParser, and sends it to a DatabaseHandler.
 	// The DatabaseHandler is then used to generate a location database.
+
+	public static void main(String args[]){
+		// Example line:
+		//compileDatabase("bubgerkig.csv", "csv", "Bubger Kig", "burgerking-db");
+	}
 	
-	public void compileDatabase(String FilenameIn, String type, String storeName, String FilenameOut){ // type is txt or csv
-		File file = new File(FilenameIn + "." + type);
+	public static void compileDatabase(String FilenameIn, String type, String storeName, String FilenameOut){ // type is txt or csv
+		File dataFile = new File(FilenameIn);
 		
-		if (file.isFile()){
+		if (dataFile.isFile()){
 			try{
-				BufferedReader br = new BufferedReader (new FileReader(FilenameIn + "." + type));
+				FileReader fr = new FileReader(dataFile);
+				BufferedReader br = new BufferedReader (fr);
 				Scanner sc = new Scanner(br);	//Scanner that goes line by line
 				DatabaseHandler db = new DatabaseHandler();
 				
 				while (sc.hasNextLine()){
 					if (type.equals("txt")){
-						db.add(locationParser.txtParser(storeName, sc.nextLine())); 
+						db.add(locationParser.txtParser(storeName, sc.nextLine()));
+						//db.add(locationParser.txtParser(storeName, sc.nextLine())); 
 					} else if (type.equals("csv")) {
-						db.add(locationParser.csvParser(sc.nextLine())); // Store name not necessary. Ugly code here, TODO?
+						String line = sc.nextLine();
+						System.out.println("LINE: " + line);
+						db.add(locationParser.csvParser(line)); // Store name not necessary. Ugly code here, TODO?
 					}			
 				}
 				sc.close();
+				fr.close();
 				br.close();
-				
-				
+	
+				db.generate(FilenameOut);
 				
 			} catch (IOException e){
-				System.out.println("TODO");
+				System.out.println("IO Exception in DatabaseCompiler; problem with BufferedReader on FileReader");
 			}
-			
-			
-			
 		} else {
 			System.out.println("Error! String provided to DatabaseCompiler does not match a file.");
 		}
-		/* Look to see if the file at Filename exists.
-		 * If so, loop over each line.
-		 *  For each line, send it to the appropriate locationparser based off "type"
-		 *  Send the object from each locationparser to a DB Handler
-		 * Generate database from handler, with name from FilenameOut.
-		 */
-		
-		
 	}
 }

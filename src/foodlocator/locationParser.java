@@ -25,10 +25,22 @@ public class locationParser {
 		Scanner sc = new Scanner(lineIn).useDelimiter(",");
 		address = sc.next();			// 1131 E. Wilmington Ave. Salt Lake City
 		String zipstate = sc.next();	// UT 84106
-		String badphone = sc.next();				// Phone:  801.359.7913
+		String badphone;
+		if (sc.hasNext()){
+			badphone = sc.next();				// Phone:  801.359.7913
+		} else {
+			badphone = "NOPHONE NOPHONE NOPHONE";
+		}
+		
+		// While zipstate is not alphanumeric, zipstate = sc.next(); See line one of wholefoods if you wanna know why. TODO, DO THIS WHEN YOU GET BACK
+		while(!zipstate.matches(".*\\d+.*")){ // Regex; \d means digit, +.* means to loop over the hole thing
+			zipstate = sc.next();
+		}
+		
 		sc.close();
 		
 		sc = new Scanner(zipstate);
+		
 		sc.next(); zipcode = sc.next();
 		sc.close();
 		
@@ -74,7 +86,11 @@ public class locationParser {
 		// Tested: This part works fine. The address being passed to the GAP is ok
 		sc = new Scanner(addressphone).useDelimiter("\\(");
 		address = sc.next();
-		phone = "(" + sc.next();
+		if (sc.hasNext()){
+			phone = "(" + sc.next();
+		} else {
+			phone = "-NO PHONE-";
+		}
 		sc.close();
 		
 		zipcode = XmlParser.getZipcode(address);
