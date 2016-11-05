@@ -8,10 +8,17 @@ public class locationParser {
 	public static LocationObject txtParser(String nameIn, String lineIn){
 		
 		/*
-		 * ## This is what is bork##
-		 * ## It is because of the & symbol; & -> %26
-		 * LINE: 6610 Marie Curie Dr (Int. of 175 & 108) Elkridge, MD 21075, Phone:  410-953-8139 
- 		 *  Address in: 6610 Marie Curie Dr (Int. of 175 & 108) Elkridge
+	## THIS IS ALSO BROKE. Look how awful it is. It's the commas. ##
+	LINE: 205 Summit Blvd, Suite 100 Birmingham, AL  35243, Phone: 205-969-7801  
+	
+	## THIS IS WHAT WAS BORK ##
+	LINE: 1133 Metropolitan Ave #100 Charlotte, NC 28204, Phone:704-334-0737
+	Exception in thread "main" java.util.NoSuchElementException
+	at java.util.Scanner.throwFor(Scanner.java:862)
+	at java.util.Scanner.next(Scanner.java:1371)
+	at foodlocator.locationParser.txtParser(locationParser.java:60)
+	at foodlocator.DatabaseCompiler.compileDatabase(DatabaseCompiler.java:35)
+	at foodlocator.DatabaseCompiler_TestClient.main(DatabaseCompiler_TestClient.java:17)
 		 */
 		
 		
@@ -37,7 +44,7 @@ public class locationParser {
 		String badphone;
 		badphone = sc.next();				// Phone:  801.359.7913
 		if (!badphone.matches(".*\\d+.*")){
-			badphone = "NOPHONE NOPHONE NOPHONE";
+			badphone = "NOPHONE: NOPHONE: NOPHONE: NOPHONE";
 		}
 		// System.out.println("DEBUG Phone: " + badphone);
 		
@@ -56,7 +63,7 @@ public class locationParser {
 			zipcode = "NO ZIPCODE";
 		}
 		
-		sc = new Scanner(badphone);
+		sc = new Scanner(badphone).useDelimiter(":");
 		sc.next(); phone = sc.next();
 		sc.close();
 		

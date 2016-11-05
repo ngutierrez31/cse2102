@@ -1,3 +1,5 @@
+1133 Metropolitan Ave #100 Charlotte, NC 28204, Phone:704-334-0737
+2052 Redwood Hwy Larkspur, CA 94921, Phone: 415-945-7955 
 6610 Marie Curie Dr (Int. of 175 & 108) Elkridge, MD 21075, Phone:  410-953-8139 
 2790 Cabot Dr  #165 Corona, CA  92883,  Phone: 951-603-0299 
 6150 Slauson Ave Culver City, CA 90230, Phone: 
@@ -77,7 +79,6 @@
 32351 Street of the Golden Lantern Laguna Niguel, CA  92677, Phone: 949-493-8599 
 8657 Villa La Jolla Dr #210 La Jolla, CA  92037, Phone: 858-546-8629 
 5495 Grossmont Center Dr La Mesa, CA 91942, Phone: 619-466-0105 
-2052 Redwood Hwy Larkspur, CA 94921, Phone: 415-945-7955 
 1122-A E Stanley Blvd Livermore, CA 94550, Phone: 925-243-1947 
 2222 Bellflower Blvd Long Beach, CA   90815, Phone: 562-596-2514 
 4210 Long Beach Blvd Long Beach, CA 90807, Phone: 562-422-1020 
@@ -359,7 +360,6 @@
 120 Merrimon Ave Asheville, NC 28801, Phone: 828-232-5078
 1393 Kildaire Farms Rd Cary, NC 27511, Phone: 919-465-5984
 1800 E Franklin St Chapel Hill, NC 27514, Phone: 919-918-7871
-1133 Metropolitan Ave #100 Charlotte, NC 28204, Phone:704-334-0737
 1820 East Arbors Dr Charlotte, NC 28262, Phone: 704-688-9578
 6418 Rea Rd Charlotte, NC 28277, Phone: 704-543-5249
 3000 Wake Forest Rd Raleigh, NC 27609, Phone: 919-981-7422
