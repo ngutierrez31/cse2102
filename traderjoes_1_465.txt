@@ -1,3 +1,7 @@
+6610 Marie Curie Dr (Int. of 175 & 108) Elkridge, MD 21075, Phone:  410-953-8139 
+2790 Cabot Dr  #165 Corona, CA  92883,  Phone: 951-603-0299 
+6150 Slauson Ave Culver City, CA 90230, Phone: 
+125 N Reino Rd Newbury Park, CA, Phone: 805-375-1984 
 205 Summit Blvd, Suite 100 Birmingham, AL  35243, Phone: 205-969-7801  
 4025 E Chandler Blvd #38 Ahwatukee, AZ   85048,  Phone: 480-759-2295  
 7720 W Bell Rd Glendale, AZ  85308,  Phone: 623-776-7414 
@@ -37,10 +41,8 @@
 1077 N Willow #101 Clovis, CA  93611, Phone: 559-325-3120 
 785 Oak Grove Rd Concord, CA  94518, Phone: 925-521-1134 
 1150 Concord Ave Concord, CA  94520,  Phone: 925-689-2990 
-2790 Cabot Dr  #165 Corona, CA  92883,  Phone: 951-603-0299 
 640 W 17th St Costa Mesa, CA  92627,  Phone: 949-642-5134 
 9290 Culver Blvd Culver City, CA  90232, Phone: 310-202-1108 
-6150 Slauson Ave Culver City, CA 90230, Phone: 
 417 Westlake Ctr Daly City, CA  94015,  Phone: 650-755-3825
 85 Railroad Ave Danville, CA  94526, Phone: 925-838-5757 
 885 Russell Blvd Davis, CA 95616, Phone: 530-757-2693
@@ -262,7 +264,6 @@
 87 Marginal Way Portland, ME 04101, Phone: 207-699-3799 
 160 F Jennifer Rd Annapolis, MD 21401, Phone:  410-573-0505 
 6831 Wisconsin Ave Bethesda, MD  20815, Phone:  301-907-0982 
-6610 Marie Curie Dr (Int. of 175 & 108) Elkridge, MD 21075, Phone:  410-953-8139 
 18270 Contour Rd Gaithersburg, MD  20877, Phone:  301-947-5953
 1809 Reisterstown Rd  #121 Pikesville, MD  21208, Phone:  410-484-8373  
 12268-H Rockville Pike Rockville, MD  20852, Phone:  301-468-6656 
@@ -295,7 +296,7 @@
 27880 Woodward Ave Royal Oak, MI 48067, Phone: 248-582-9002
 4270 W 78th St Bloomington, MN 55435, Phone: 952-835-8640
 12105 Elm Creek Blvd N Maple Grove, MN 55369, Phone: 763-315-1739
-11220 Wayzata Blvd Minnetonka, MN 55305, Phone: 952-417-9080
+11220 Wayzata Blvd Minnetonka, MN 55305, Phone: 952-417-9080
 1200 16th St SW Rochester, MN 55902, Phone: 507-281-4411
 1041 Red Fox Rd Shoreview, MN 55126, Phone: 651-765-1398
 4500 Excelsior Blvd St. Louis Park, MN 55416, Phone: 952-285-1053
@@ -424,7 +425,7 @@
 634 E 400 S Salt Lake City UT 84102, Phone: 801-359-2462
 200 Dorset St South Burlington, VT 05403, Phone: 802-658-4500
 612 N Saint Asaph St Alexandria, VA 22314, Phone: 703-548-0611
-5847 Leesburg Pike Bailey’s Crossroads, VA 22041, Phone: 703-379-5883
+5847 Leesburg Pike Bailey's Crossroads, VA 22041, Phone: 703-379-5883
 14100 Lee Hwy Centreville, VA 20120, Phone: 703-815-0697
 2025 Bond St Charlottesville, VA 22901, Phone: 434-974-1466
 1109 N Highland St Arlington, VA 22201, Phone: 703-351-8015

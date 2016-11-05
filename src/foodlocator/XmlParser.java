@@ -16,6 +16,8 @@ import java.io.InputStream;
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.MalformedURLException;
 
+import java.net.URLEncoder;
+
 public class XmlParser {
 
 	private static String APIKEY = "AIzaSyBq_j2SJHZj7trix3uZW3IH-859UXN5skQ";
@@ -28,10 +30,12 @@ public class XmlParser {
 	}
 
 	public static float getLat(String address_in) {
+		System.out.println(" Address in: " + address_in);
 		return Float.parseFloat(getElement(address_in, "//location/lat/text()", ""));
 	}
 
 	public static float getLong(String address_in) {
+		System.out.println(" Address in: " + address_in);
 		return Float.parseFloat(getElement(address_in, "//location/lng/text()", ""));
 	}
 
@@ -76,12 +80,21 @@ public class XmlParser {
 
 	private static String fixAddress(String address_in) {
 		// Reformats the address in
+		String address_out;
+		try {
+			address_out = URLEncoder.encode(address_in, "UTF-8");
+		} catch (UnsupportedEncodingException e){
+			System.out.println("Unformatted URL Exception in XmlParser fixAddress!");
+			address_out = "1 Storrs Road, Storrs CT";
+		}
+		/*
 		Scanner sc = new Scanner(address_in).useDelimiter(" ");
 		String address_out = "";
 		while (sc.hasNext()) {
 			address_out = address_out + sc.next() + "%20";
 		}
 		sc.close();
+		*/
 		return address_out;
 	}
 

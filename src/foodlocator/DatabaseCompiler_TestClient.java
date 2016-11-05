@@ -8,12 +8,14 @@ public class DatabaseCompiler_TestClient {
 		//DatabaseCompiler.compileDatabase("wholefoods_small.txt", "txt", "Hopefoops", "wholefoods_small-db"); // Compiles fully!
 		//DatabaseCompiler.compileDatabase("mcdonalds_small.csv", "csv", "Bupker_birg", "mcdonalds_small-db");
 		
-		// YET TO BE COMPILED:
+		// COMPILEDCOMPILED:
 		/*
-		DatabaseCompiler.compileDatabase("traderjoes_1_465.txt","txt","Trader Joes", "traderjoes_1-db");
+		
 		*/
 		
 		// COMPILING: 
+		DatabaseCompiler.compileDatabase("traderjoes_1_465.txt","txt","Trader Joes", "traderjoes_1-db");
+		
 		
 		// NOT YET COMPILED
 		/*

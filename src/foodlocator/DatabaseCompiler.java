@@ -30,7 +30,9 @@ public class DatabaseCompiler {
 				
 				while (sc.hasNextLine()){
 					if (type.equals("txt")){
-						db.add(locationParser.txtParser(storeName, sc.nextLine()));
+						String line = sc.nextLine();
+						System.out.println("LINE: " + line);
+						db.add(locationParser.txtParser(storeName, line));
 						//db.add(locationParser.txtParser(storeName, sc.nextLine())); 
 					} else if (type.equals("csv")) {
 						String line = sc.nextLine();

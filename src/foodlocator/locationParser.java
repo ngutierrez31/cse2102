@@ -6,6 +6,15 @@ public class locationParser {
 
 	
 	public static LocationObject txtParser(String nameIn, String lineIn){
+		
+		/*
+		 * ## This is what is bork##
+		 * ## It is because of the & symbol; & -> %26
+		 * LINE: 6610 Marie Curie Dr (Int. of 175 & 108) Elkridge, MD 21075, Phone:  410-953-8139 
+ 		 *  Address in: 6610 Marie Curie Dr (Int. of 175 & 108) Elkridge
+		 */
+		
+		
 		float 	longitude;	// Geocode orders are lat/long, but we get long/lat first.
 		float 	latitude;		
 		String 	name;		//E.g. McDonalds
@@ -26,23 +35,26 @@ public class locationParser {
 		address = sc.next();			// 1131 E. Wilmington Ave. Salt Lake City
 		String zipstate = sc.next();	// UT 84106
 		String badphone;
-		if (sc.hasNext()){
-			badphone = sc.next();				// Phone:  801.359.7913
-		} else {
+		badphone = sc.next();				// Phone:  801.359.7913
+		if (!badphone.matches(".*\\d+.*")){
 			badphone = "NOPHONE NOPHONE NOPHONE";
 		}
+		// System.out.println("DEBUG Phone: " + badphone);
 		
 		// While zipstate is not alphanumeric, zipstate = sc.next(); See line one of wholefoods if you wanna know why. TODO, DO THIS WHEN YOU GET BACK
-		while(!zipstate.matches(".*\\d+.*")){ // Regex; \d means digit, +.* means to loop over the hole thing
-			zipstate = sc.next();
+		if (!zipstate.matches(".*\\d+.*")){ // Regex; \d means digit, +.* means to loop over the hole thing
+			zipstate = "NO ZIPCODE";
 		}
 		
 		sc.close();
 		
-		sc = new Scanner(zipstate);
-		
-		sc.next(); zipcode = sc.next();
-		sc.close();
+		if (!zipstate.equals("NO ZIPCODE")){
+			sc = new Scanner(zipstate);
+			sc.next(); zipcode = sc.next();
+			sc.close();
+		} else {
+			zipcode = "NO ZIPCODE";
+		}
 		
 		sc = new Scanner(badphone);
 		sc.next(); phone = sc.next();
@@ -97,6 +109,10 @@ public class locationParser {
 				
 		LocationObject result = new LocationObject(name, latitude, longitude, zipcode, address, type, -1, phone); // -1 is distance; change upon search
 		return result;
+	}
+	
+	private void safeNext(Scanner scanner){ //Returns the next non-empty string
+		
 	}
 
 }
