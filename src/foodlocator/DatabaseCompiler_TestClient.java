@@ -10,16 +10,14 @@ public class DatabaseCompiler_TestClient {
 		
 		// COMPILED:
 		/*
-		
+		DatabaseCompiler.compileDatabase("traderjoes_1_465.txt","txt","Trader Joes", "traderjoes_1-db");
 		*/
 		
 		// COMPILING: 
-		DatabaseCompiler.compileDatabase("traderjoes_1_465.txt","txt","Trader Joes", "traderjoes_1-db");
-		
+		DatabaseCompiler.compileDatabase("wholefoods_1_382.txt","txt","Wholefoods", "wholefoods_1-db");
 		
 		// NOT YET COMPILED
 		/*
-		DatabaseCompiler.compileDatabase("wholefoods_1_382.txt","txt","Wholefoods", "wholefoods_1-db");
 		DatabaseCompiler.compileDatabase("wendys_3_1081.csv","csv","Wendy's", "wendys_3-db");
 		
 		DatabaseCompiler.compileDatabase("wendys_1.csv","csv","Wendy's", "wendys_1-db");

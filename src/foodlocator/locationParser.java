@@ -55,8 +55,8 @@ public class locationParser {
 		sc.close();
 		phone = secondPart;
 		
-		//System.out.println("DEBUG firstPart: [" + firstPart + "]");
-		//System.out.println("DEBUG secondPart: [" + secondPart + "]");
+		System.out.println("DEBUG firstPart: [" + firstPart + "]");
+		System.out.println("DEBUG secondPart: [" + secondPart + "]");
 		
 		// Part two: Delimit firstPart to separate into address and zip
 		sc = new Scanner(firstPart);
@@ -71,12 +71,11 @@ public class locationParser {
 				StringBuilder sb = new StringBuilder(address);
 				sb.setLength(sb.length() - 5);
 				address = sb.toString();
-				
+				System.out.println("Debug; Final address: [" + address + "]");
 			} else {
 				address = new StringBuilder(address).append(next + " ").toString();		
 			}
 		}
-		
 		
 		longitude = XmlParser.getLong(address);
 		latitude = XmlParser.getLat(address);
