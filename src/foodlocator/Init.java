@@ -52,6 +52,7 @@ public class Init extends Application {
 	
 	TableView<LocationResultObject> partThreeTable = new TableView<LocationResultObject>();
 	// TODO: This is only for testing this out; we need to be able to add to this list!
+	// TODO: Oh cool we can actually just change the data in this table, probably, and be fine.
 	final ObservableList<LocationResultObject> data = FXCollections.observableArrayList(
 			new LocationResultObject("Name", "Address", "-1", "860-phoney"),
 			new LocationResultObject("Wembles", "Drive", "-1", "123-woop"),
