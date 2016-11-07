@@ -1,0 +1,25 @@
+package foodlocator;
+
+import java.util.ArrayList;
+
+public class Search 
+{
+public static void main(String[] args) 
+{
+}
+
+public static ArrayList<LocationObject> getNearLocations(ArrayList<LocationObject> a, float lat, float lon, String zipcode) 
+{
+ArrayList<LocationObject> ret = new ArrayList<>();
+
+for(LocationObject l: a) 
+{
+if(l.getStoreZipcode().equals(zipcode) && getDistance(lat, longi, l.getStoreLat(), l.getStoreLong()) < 41.6) {
+ret.add(l);
+}
+}
+
+return ret;
+}
+
+}
