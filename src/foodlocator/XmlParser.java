@@ -30,12 +30,12 @@ public class XmlParser {
 	}
 
 	public static float getLat(String address_in) {
-		System.out.println(" Address in: " + address_in);
+		//System.out.println(" Address in: " + address_in);	//Debug
 		return Float.parseFloat(getElement(address_in, "//location/lat/text()", ""));
 	}
 
 	public static float getLong(String address_in) {
-		System.out.println(" Address in: " + address_in);
+		//System.out.println(" Address in: " + address_in); // Debug
 		return Float.parseFloat(getElement(address_in, "//location/lng/text()", ""));
 	}
 

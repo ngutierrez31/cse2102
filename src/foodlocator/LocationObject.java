@@ -97,7 +97,7 @@ public class LocationObject {
 	
 	public void printAll(){
 		print("Location Object information:\n ");
-		print(this.getStoreName() + " at " + this.getStoreStreetAddress() + ", " + storeZipcode + "\n");
+		print(this.getStoreName() + " at " + this.getStoreStreetAddress() + ", Zip: " + storeZipcode + "\n");
 		print(" Geocode: " + getStoreLong() + ", " + getStoreLat() + "; " + getStoreDistance() + " miles away.\n");
 		print(" Type: " + getStoreType() + "; Phone: " + getStorePhone());
 		print("\n");

@@ -8,18 +8,18 @@ public class locationParser {
 	public static LocationObject txtParser(String nameIn, String lineIn){
 		
 		/*
-	## THIS IS ALSO BROKE. Look how awful it is. It's the commas. ##
-	LINE: 205 Summit Blvd, Suite 100 Birmingham, AL  35243, Phone: 205-969-7801  
-	
-	## THIS IS WHAT WAS BORK ##
-	LINE: 1133 Metropolitan Ave #100 Charlotte, NC 28204, Phone:704-334-0737
-	Exception in thread "main" java.util.NoSuchElementException
-	at java.util.Scanner.throwFor(Scanner.java:862)
-	at java.util.Scanner.next(Scanner.java:1371)
-	at foodlocator.locationParser.txtParser(locationParser.java:60)
-	at foodlocator.DatabaseCompiler.compileDatabase(DatabaseCompiler.java:35)
-	at foodlocator.DatabaseCompiler_TestClient.main(DatabaseCompiler_TestClient.java:17)
+		This like broke it:
+		634 E 400 S Salt Lake City UT 84102, Phone: 801-359-2462
+		There is no comma between the zip code and the thing
+		Maybe zipcode should just be the last non-whitecode line in the second part?
 		 */
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		float 	longitude;	// Geocode orders are lat/long, but we get long/lat first.
@@ -27,7 +27,7 @@ public class locationParser {
 		String 	name;		//E.g. McDonalds
 		String	zipcode;	// Get THIS from GOOGLE
 		int 	type;		// 0 is healthy, 1 is junkfood
-		String	address;	// E.g 3828 W Dimond Blvd, Anchorage,AK
+		String	address = "";	// E.g 3828 W Dimond Blvd, Anchorage,AK
 		String	phone;
 		type = 1;		// Junk foods are in csv files
 		
@@ -38,34 +38,41 @@ public class locationParser {
 		
 		// 1131 E. Wilmington Ave. Salt Lake City, UT 84106, Phone:  801.359.7913
 		
-		Scanner sc = new Scanner(lineIn).useDelimiter(",");
-		address = sc.next();			// 1131 E. Wilmington Ave. Salt Lake City
-		String zipstate = sc.next();	// UT 84106
-		String badphone;
-		badphone = sc.next();				// Phone:  801.359.7913
-		if (!badphone.matches(".*\\d+.*")){
-			badphone = "NOPHONE: NOPHONE: NOPHONE: NOPHONE";
-		}
-		// System.out.println("DEBUG Phone: " + badphone);
+		// Part one: Reverse string and delimit via "Phone"
+		lineIn = new StringBuilder(lineIn).reverse().toString();
+		Scanner sc = new Scanner(lineIn).useDelimiter(":enohP");
 		
-		// While zipstate is not alphanumeric, zipstate = sc.next(); See line one of wholefoods if you wanna know why. TODO, DO THIS WHEN YOU GET BACK
-		if (!zipstate.matches(".*\\d+.*")){ // Regex; \d means digit, +.* means to loop over the hole thing
-			zipstate = "NO ZIPCODE";
-		}
+		String firstPart;	// Everything to the left of "Phone"
+		String secondPart;	// Everything to the right of "Phone:"
 		
-		sc.close();
-		
-		if (!zipstate.equals("NO ZIPCODE")){
-			sc = new Scanner(zipstate);
-			sc.next(); zipcode = sc.next();
-			sc.close();
+		secondPart = new StringBuilder( sc.next() ).reverse().toString();
+		if (sc.hasNext()){
+			firstPart = new StringBuilder(sc.next()).reverse().toString();
 		} else {
-			zipcode = "NO ZIPCODE";
+			firstPart = new StringBuilder(secondPart).toString();
+			secondPart = "NO PHONE";
+		}
+		sc.close();
+		phone = secondPart;
+		
+		//System.out.println("DEBUG firstPart: [" + firstPart + "]");
+		//System.out.println("DEBUG secondPart: [" + secondPart + "]");
+		
+		// Part two: Delimit firstPart to separate into address and zip
+		sc = new Scanner(firstPart);
+		zipcode = "{NO ZIP FOUND}";
+		while (sc.hasNext()){
+			String next = sc.next();
+			//System.out.println("Deb. Next: [" + next + "]");
+			if (!sc.hasNext()){
+				Scanner zpsc = new Scanner(next).useDelimiter(",");
+				zipcode = zpsc.next();
+				zpsc.close();
+			} else {
+				address = new StringBuilder(address).append(next + " ").toString();		
+			}
 		}
 		
-		sc = new Scanner(badphone).useDelimiter(":");
-		sc.next(); phone = sc.next();
-		sc.close();
 		
 		longitude = XmlParser.getLong(address);
 		latitude = XmlParser.getLat(address);

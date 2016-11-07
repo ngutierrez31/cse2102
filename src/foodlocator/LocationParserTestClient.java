@@ -32,14 +32,18 @@ public class LocationParserTestClient {
 		*/
 		
 		print ("\n\n!! Testing the txt parser! \n Compare the long/lats:");
-		
-		String txt1 = "2217 S Shore Ctr Alameda, CA  94501, Phone: 510-769-5450 ";
-		String txt2 = "1411 E. Renner Road Richardson, TX 75082, Phone:  214.273.0902";
-		String txt3 = "1333 Newell Ave Walnut Creek, CA 94596, Phone:  925.274.9700";
-		
+
+		String txt1 = "205 Summit Blvd, Suite 100 Birmingham, AL  35243, Phone: 205-969-7801  ";	
+		String txt2 = "125 N Reino Rd Newbury Park, CA, Phone: 805-375-1984 ";
+		String txt3 = "6150 Slauson Ave Culver City, CA 90230, Phone: ";
+/*		
 		String txtcode1 = "37.7563752, -122.2528046";
 		String txtcode2 = "32.9988408, -96.6987141";
 		String txtcode3 = "37.8928784, -122.0555321";
+*/
+		String txtcode1 = "- no longlat -";
+		String txtcode2 = txtcode1;
+		String txtcode3 = txtcode1;
 		
 		LocationObject txt1_obj = locationParser.txtParser("NAME GOES HERE", txt1);
 		LocationObject txt2_obj = locationParser.txtParser("NAME GOES HERE", txt2);
