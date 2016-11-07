@@ -34,7 +34,7 @@ public class LocationParserTestClient {
 		print ("\n\n!! Testing the txt parser! \n Compare the long/lats:");
 
 		String txt1 = "205 Summit Blvd, Suite 100 Birmingham, AL  35243, Phone: 205-969-7801  ";	
-		String txt2 = "125 N Reino Rd Newbury Park, CA, Phone: 805-375-1984 ";
+		String txt2 = "125 N Reino Rd Newbury Park, CA, 91320 Phone: 805-375-1984 ";
 		String txt3 = "6150 Slauson Ave Culver City, CA 90230, Phone: ";
 /*		
 		String txtcode1 = "37.7563752, -122.2528046";

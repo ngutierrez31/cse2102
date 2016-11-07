@@ -68,6 +68,10 @@ public class locationParser {
 				Scanner zpsc = new Scanner(next).useDelimiter(",");
 				zipcode = zpsc.next();
 				zpsc.close();
+				StringBuilder sb = new StringBuilder(address);
+				sb.setLength(sb.length() - 5);
+				address = sb.toString();
+				
 			} else {
 				address = new StringBuilder(address).append(next + " ").toString();		
 			}
