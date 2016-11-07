@@ -39,7 +39,11 @@ import java.io.*;
 public class GeocodeDistance
 {
 
-	private static float distance(float lat1, float lon1, float lat2, float lon2, String unit) {
+	public static float distance(float lat1, float lon1, float lat2, float lon2) {
+		return distance(lat1, lon1, lat2, lon2, "M");
+	}
+	
+	public static float distance(float lat1, float lon1, float lat2, float lon2, String unit) {
 		double theta = lon1 - lon2;
 		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
 		dist = Math.acos(dist);
